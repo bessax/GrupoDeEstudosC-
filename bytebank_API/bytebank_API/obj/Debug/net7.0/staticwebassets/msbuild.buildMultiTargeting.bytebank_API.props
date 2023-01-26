@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\bytebank_API.props" />
+</Project>

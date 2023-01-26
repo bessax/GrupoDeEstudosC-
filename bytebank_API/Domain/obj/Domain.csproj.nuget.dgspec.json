@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\andre\\OneDrive\\Desktop\\Grupo de Estudos\\projeto_bytebank\\GrupoDeEstudosC\\bytebank_API\\bytebank_API\\bytebank_API.csproj": {}
+    "C:\\Users\\andre\\OneDrive\\Desktop\\Grupo de Estudos\\projeto_bytebank\\GrupoDeEstudosC\\bytebank_API\\Domain\\Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\andre\\OneDrive\\Desktop\\Grupo de Estudos\\projeto_bytebank\\GrupoDeEstudosC\\bytebank_API\\bytebank_API\\bytebank_API.csproj": {
+    "C:\\Users\\andre\\OneDrive\\Desktop\\Grupo de Estudos\\projeto_bytebank\\GrupoDeEstudosC\\bytebank_API\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\andre\\OneDrive\\Desktop\\Grupo de Estudos\\projeto_bytebank\\GrupoDeEstudosC\\bytebank_API\\bytebank_API\\bytebank_API.csproj",
-        "projectName": "bytebank_API",
-        "projectPath": "C:\\Users\\andre\\OneDrive\\Desktop\\Grupo de Estudos\\projeto_bytebank\\GrupoDeEstudosC\\bytebank_API\\bytebank_API\\bytebank_API.csproj",
+        "projectUniqueName": "C:\\Users\\andre\\OneDrive\\Desktop\\Grupo de Estudos\\projeto_bytebank\\GrupoDeEstudosC\\bytebank_API\\Domain\\Domain.csproj",
+        "projectName": "Domain",
+        "projectPath": "C:\\Users\\andre\\OneDrive\\Desktop\\Grupo de Estudos\\projeto_bytebank\\GrupoDeEstudosC\\bytebank_API\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\andre\\OneDrive\\Desktop\\Grupo de Estudos\\projeto_bytebank\\GrupoDeEstudosC\\bytebank_API\\bytebank_API\\obj\\",
+        "outputPath": "C:\\Users\\andre\\OneDrive\\Desktop\\Grupo de Estudos\\projeto_bytebank\\GrupoDeEstudosC\\bytebank_API\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
