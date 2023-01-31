@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace bytebank_API
 {
-    public abstract class Endereco
+    public class Endereco
     {
         public int IdEndereco { get; set; }
         public string Logradouro { get; set; } 
