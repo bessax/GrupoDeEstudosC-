@@ -9,7 +9,7 @@ namespace bytebank_API
     {
         public int IdAgencia { get; set; }
         public int NumeroAgencia { get; set; }
-        public string NomeAgencia { get; set; }
-        public EnderecoAgencia EnderecoAgencia { get; set; }
+        public string? NomeAgencia { get; set; }
+        public EnderecoAgencia? EnderecoAgencia { get; set; }
     }
 }
