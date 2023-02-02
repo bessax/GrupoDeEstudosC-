@@ -7,5 +7,7 @@ namespace bytebank_API
 {
     public class EnderecoAgencia : Endereco
     {
+        
+
     }
 }
