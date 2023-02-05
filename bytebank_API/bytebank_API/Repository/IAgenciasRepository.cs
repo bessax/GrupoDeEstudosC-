@@ -1,13 +1,12 @@
-using bytebank_API.Models;
 
 namespace bytebank_API.Repository
 {
-    public interface IAgenciasRepository
+    public interface IRepository<T>
     {
-        Task AlteraAgenciaAsync(Agencia agencia);
-        Task<Agencia> BuscaAgenciaPorIdAsync(int id);
-        Task<List<Agencia>> BuscaAgenciasAsync();
-        Task CriarAgenciaAsync(Agencia agencia);
-        Task DeletaAgenciaAsync(Agencia agencia);
+        Task AlteraAsync(T obj);
+        Task<T> BuscaPorIdAsync(int id);
+        Task<List<T>> BuscaTodosAsync();
+        Task CriarAsync(T obj);
+        Task DeletaAsync(T obj);
     }
 }
