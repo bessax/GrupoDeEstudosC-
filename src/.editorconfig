@@ -364,8 +364,14 @@ dotnet_naming_style.s_camelcase.capitalization = camel_case
 
 # Diagnostic configuration
 
+# XML comment analysis disabled
+dotnet_diagnostic.SA0001.severity = None
+
 # Using directive should appear within a namespace declaration
 dotnet_diagnostic.SA1200.severity = None
 
-# XML comment analysis disabled
-dotnet_diagnostic.SA0001.severity = None
+# Elements should be documented
+dotnet_diagnostic.SA1600.severity = None
+
+# Enumeration items should be documented
+dotnet_diagnostic.SA1602.severity = None
