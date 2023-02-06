@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using bytebank_API.Data;
 using bytebank_API.Models;
+using bytebank_API.Repository;
+using bytebank_API.Services;
 
 namespace bytebank_API.Controllers
 {
@@ -9,39 +10,36 @@ namespace bytebank_API.Controllers
     [ApiController]
     public class AgenciasController : ControllerBase
     {
-        private readonly ByteBankContext _context;
+        private readonly IAgenciasService _service;
 
-        public AgenciasController(ByteBankContext context)
+        public AgenciasController(IAgenciasService service)
         {
-            _context = context;
+            _service = service;
         }
 
         // GET: api/Agencias
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Agencia>>> GetAgencias()
         {
-            if (_context.Agencias == null)
+            var agencias = await _service.BuscaAgenciasAsync();
+
+            if (agencias == null)
             {
                 return NotFound();
             }
-            return await _context.Agencias.ToListAsync();
+            return agencias;
         }
 
         // GET: api/Agencias/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Agencia>> GetAgencia(int id)
         {
-            if (_context.Agencias == null)
-            {
-                return NotFound();
-            }
-            var agencia = await _context.Agencias.FindAsync(id);
+            var agencia = await _service.BuscaAgenciaPorIdAsync(id);
 
             if (agencia == null)
             {
                 return NotFound();
             }
-
             return agencia;
         }
 
@@ -55,25 +53,7 @@ namespace bytebank_API.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(agencia).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AgenciaExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return await _service.AlteraAgenciaAsync(agencia) ? NoContent() : NotFound();
         }
 
         // POST: api/Agencias
@@ -81,40 +61,23 @@ namespace bytebank_API.Controllers
         [HttpPost]
         public async Task<ActionResult<Agencia>> PostAgencia(Agencia agencia)
         {
-            if (_context.Agencias == null)
+            if (await _service.BuscaAgenciasAsync() == null)
             {
                 return Problem("Entity set 'ByteBankContext.Agencias'  is null.");
             }
-            _context.Agencias.Add(agencia);
-            await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAgencia", new { id = agencia.Id }, agencia);
+            var agenciaCriada = await _service.CriaAgenciaAsync(agencia);
+
+            return CreatedAtAction("GetAgencia", new { id = agenciaCriada.Id }, agenciaCriada);
         }
 
         // DELETE: api/Agencias/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAgencia(int id)
         {
-            if (_context.Agencias == null)
-            {
-                return NotFound();
-            }
-            var agencia = await _context.Agencias.FindAsync(id);
 
-            if (agencia == null)
-            {
-                return NotFound();
-            }
-
-            _context.Agencias.Remove(agencia);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            return await _service.DeletaAgenciaAsync(id) ? NoContent() : NotFound();
         }
 
-        private bool AgenciaExists(int id)
-        {
-            return (_context.Agencias?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
     }
 }
