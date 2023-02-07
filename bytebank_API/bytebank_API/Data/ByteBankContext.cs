@@ -7,8 +7,8 @@ namespace bytebank_API.Data
     {
         public ByteBankContext(DbContextOptions<ByteBankContext> options) : base(options)
         {
-        }
 
+        }
         public DbSet<Conta> Contas { get; set; } = null!;
         public DbSet<Agencia> Agencias { get; set; } = null!;
         public DbSet<Cliente> Clientes { get; set; } = null!;

@@ -5,7 +5,6 @@ namespace bytebank_API.Models
         public int Id { get; set; }
         public required int NumeroAgencia { get; set; }
         public required string NomeAgencia { get; set; }
-
         public required EnderecoAgencia Endereco { get; set; }
     }
 }
