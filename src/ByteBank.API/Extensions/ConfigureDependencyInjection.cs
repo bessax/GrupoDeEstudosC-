@@ -21,9 +21,13 @@ public static class ConfigureDependencyInjection
 
     internal static void ConfigureAppServices(IServiceCollection services)
     {
+        services.AddAutoMapper(typeof(Program));
+
         services.AddScoped<ByteBankContext>();
         services.AddScoped<IRepository<Agencia>, AgenciasRepository>();
+        services.AddScoped<IContaCorrenteRepository, ContaCorrenteRepository>();
         services.AddScoped<IAgenciasService, AgenciasService>();
+        services.AddScoped<IContaCorrenteService, ContaCorrenteService>();
         services.AddTransient<IClienteRepository, ClienteRepository>();
         services.AddTransient<IEnderecoAgenciaRepository, EnderecoAgenciaRepository>();
     }
