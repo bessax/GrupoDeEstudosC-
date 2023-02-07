@@ -4,11 +4,12 @@
 
 namespace ByteBank.API.Base
 {
-    public interface IBaseRepository<T> where T : class
+    public interface IBaseRepository<T>
+        where T : class
     {
-        Task AlteraAsync(int id,T obj);
+        Task AlteraAsync(int id, T obj);
 
-        Task<T> BuscaPorIdAsync(int id);
+        Task<T?> BuscaPorIdAsync(int id);
 
         Task<List<T>> BuscaTodosAsync();
 
