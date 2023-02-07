@@ -3,11 +3,7 @@
 // </copyright>
 
 using ByteBank.API.Data;
-using ByteBank.API.Models;
-using ByteBank.API.Repository;
-using ByteBank.API.Repository.EFCore;
-using ByteBank.API.Services;
-using ByteBank.API.Services.Handlers;
+using ByteBank.API.Extensions;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -18,8 +14,11 @@ builder.Services.AddDbContext<ByteBankContext>(options =>
 {
     options.UseSqlServer("Name=ByteBankConnection");
 });
-builder.Services.AddScoped<IRepository<Agencia>, AgenciasRepository>();
-builder.Services.AddScoped<IAgenciasService, AgenciasService>();
+
+//builder.Services.AddScoped<IRepository<Agencia>, AgenciasRepository>();
+//builder.Services.AddScoped<IAgenciasService, AgenciasService>();
+
+builder.Services.ConfigureDI();
 
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();

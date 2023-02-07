@@ -13,8 +13,12 @@ namespace ByteBank.API.Data
         public ByteBankContext(DbContextOptions<ByteBankContext> options)
             : base(options)
         {
-        }
 
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            // optionsBuilder.LogTo(Console.WriteLine); Exemplo de exibição de log no Console.
+        }
         public DbSet<Conta> Contas { get; set; } = null!;
 
         public DbSet<Agencia> Agencias { get; set; } = null!;
@@ -30,4 +34,5 @@ namespace ByteBank.API.Data
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ByteBankContext).Assembly);
         }
     }
+
 }
