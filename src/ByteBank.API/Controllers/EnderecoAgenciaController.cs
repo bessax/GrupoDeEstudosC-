@@ -1,4 +1,8 @@
-﻿using ByteBank.API.Interface;
+﻿// <copyright file="EnderecoAgenciaController.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+using ByteBank.API.Interface;
 using ByteBank.API.Models;
 using ByteBank.API.Services;
 
@@ -12,9 +16,9 @@ public class EnderecoAgenciaController : ControllerBase
 {
     private readonly IEnderecoAgenciaRepository repository;
 
-    public EnderecoAgenciaController(IEnderecoAgenciaRepository _repository)
+    public EnderecoAgenciaController(IEnderecoAgenciaRepository repository)
     {
-        this.repository = _repository;
+        this.repository = repository;
     }
 
     // GET: api/Agencias
@@ -30,5 +34,4 @@ public class EnderecoAgenciaController : ControllerBase
 
         return enderecoAgencia;
     }
-
 }

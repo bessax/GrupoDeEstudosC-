@@ -6,41 +6,47 @@ using Microsoft.EntityFrameworkCore;
 namespace ByteBank.API.Base;
 
 public class BaseRepository<T> : IBaseRepository<T>
-    where T:class
+    where T : class
 {
-    private readonly DbContext? context;
+    private readonly DbContext context;
+
     public BaseRepository(DbContext context)
     {
-      this.context = context;
-    }
-    public async Task AlteraAsync(int id, T obj)
-    {
-        context.Set<T>().Update(obj);
-        await context.SaveChangesAsync();
+        this.context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
-    public async Task<T> BuscaPorIdAsync(int id)
+    public async Task AlteraAsync(int id, T obj)
     {
-        return await context.Set<T>().FindAsync(id);
+        this.context.Set<T>().Update(obj);
+        await this.context.SaveChangesAsync();
     }
+
+    public async Task<T?> BuscaPorIdAsync(int id)
+    {
+        return await this.context.Set<T>().FindAsync(id);
+    }
+
     public async Task<List<T>> BuscaTodosAsync()
     {
-        return await context.Set<T>().AsNoTracking().ToListAsync();
+        return await this.context.Set<T>().AsNoTracking().ToListAsync();
     }
+
     public async Task CriarAsync(T obj)
     {
-        await context.Set<T>().AddAsync(obj);
-        await context.SaveChangesAsync();
+        await this.context.Set<T>().AddAsync(obj);
+        await this.context.SaveChangesAsync();
     }
+
     public async Task DeletaAsync(int id)
     {
         var entity = await this.BuscaPorIdAsync(id);
-        context.Set<T>().Remove(entity);
-        await context.SaveChangesAsync();
-    }
-    public void Dispose()
-    {
-        context.Dispose();
-        GC.SuppressFinalize(this);
+
+        if (entity == null)
+        {
+            return;
+        }
+
+        this.context.Set<T>().Remove(entity);
+        await this.context.SaveChangesAsync();
     }
 }

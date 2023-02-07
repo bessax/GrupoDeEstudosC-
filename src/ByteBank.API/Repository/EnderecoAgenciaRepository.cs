@@ -1,4 +1,8 @@
-﻿using ByteBank.API.Base;
+﻿// <copyright file="EnderecoAgenciaRepository.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+using ByteBank.API.Base;
 using ByteBank.API.Data;
 using ByteBank.API.Interface;
 using ByteBank.API.Models;
@@ -7,9 +11,11 @@ namespace ByteBank.API.Repository;
 
 public class EnderecoAgenciaRepository : BaseRepository<EnderecoAgencia>, IEnderecoAgenciaRepository
 {
-    private ByteBankContext _context;
-    public EnderecoAgenciaRepository(ByteBankContext context) : base(context)
+    private readonly ByteBankContext context;
+
+    public EnderecoAgenciaRepository(ByteBankContext context)
+        : base(context)
     {
-        _context = context;
+        this.context = context;
     }
 }
