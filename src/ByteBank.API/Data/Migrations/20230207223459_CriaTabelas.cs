@@ -1,12 +1,14 @@
-﻿// <copyright file="20230206174327_CriaTabelas.cs" company="PlaceholderCompany">
+﻿// <copyright file="20230207223459_CriaTabelas.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
+
+using System;
 
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace BytebankAPI.Data.Migrations
+namespace ByteBank.API.Data.Migrations
 {
     /// <inheritdoc />
     public partial class CriaTabelas : Migration
@@ -34,8 +36,8 @@ namespace BytebankAPI.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Cpf = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Cpf = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Tipo = table.Column<int>(type: "int", nullable: false),
                 },
                 constraints: table =>
@@ -77,6 +79,9 @@ namespace BytebankAPI.Data.Migrations
                     ChavePix = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Tipo = table.Column<int>(type: "int", nullable: false),
                     AgenciaId = table.Column<int>(type: "int", nullable: false),
+                    CriadoEm = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AtualizadoEm = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ExcluidoEm = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ClienteId = table.Column<int>(type: "int", nullable: true),
                 },
                 constraints: table =>
@@ -118,6 +123,16 @@ namespace BytebankAPI.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cliente_Cpf",
+                table: "Cliente",
+                column: "Cpf");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cliente_Nome",
+                table: "Cliente",
+                column: "Nome");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Conta_AgenciaId",

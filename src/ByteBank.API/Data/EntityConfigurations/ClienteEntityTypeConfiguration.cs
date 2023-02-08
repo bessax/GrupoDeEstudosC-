@@ -27,6 +27,12 @@ namespace ByteBank.API.Data.EntityConfigurations
                 .WithOne()
                 .HasForeignKey("ClienteId")
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder
+                .HasIndex(c => c.Nome);
+
+            builder
+                .HasIndex(c => c.Cpf);
         }
     }
 }

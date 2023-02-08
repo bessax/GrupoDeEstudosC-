@@ -9,10 +9,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace BytebankAPI.Data.Migrations
+namespace ByteBank.API.Data.Migrations
 {
     [DbContext(typeof(ByteBankContext))]
-    [Migration("20230206174327_CriaTabelas")]
+    [Migration("20230207223459_CriaTabelas")]
     partial class CriaTabelas
     {
         /// <inheritdoc />
@@ -55,16 +55,20 @@ namespace BytebankAPI.Data.Migrations
 
                     b.Property<string>("Cpf")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Tipo")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Cpf");
+
+                    b.HasIndex("Nome");
 
                     b.ToTable("Cliente", (string)null);
                 });
@@ -80,12 +84,21 @@ namespace BytebankAPI.Data.Migrations
                     b.Property<int>("AgenciaId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("AtualizadoEm")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("ChavePix")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("ClienteId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("CriadoEm")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ExcluidoEm")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("NumeroConta")
                         .IsRequired()

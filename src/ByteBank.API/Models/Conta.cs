@@ -2,6 +2,8 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
+using System.ComponentModel.DataAnnotations;
+
 using ByteBank.API.Enums;
 
 namespace ByteBank.API.Models
@@ -19,6 +21,12 @@ namespace ByteBank.API.Models
         required public TipoConta Tipo { get; set; }
 
         required public int AgenciaId { get; set; }
+
+        public DateTime CriadoEm { get; set; }
+
+        public DateTime AtualizadoEm { get; set; }
+
+        public DateTime? ExcluidoEm { get; set; }
 
         public void Sacar()
         {
