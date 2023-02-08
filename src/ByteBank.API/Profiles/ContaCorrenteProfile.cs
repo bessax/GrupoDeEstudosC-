@@ -14,9 +14,9 @@ namespace ByteBank.API.Profiles
     {
         public ContaCorrenteProfile()
         {
-            this.CreateMap<Conta, ContaCorrenteDto>();
+            this.CreateMap<Conta, ContaCorrenteViewModel>();
 
-            this.CreateMap<ContaCorrenteDto, Conta>()
+            this.CreateMap<ContaCorrenteViewModel, Conta>()
                 .ForMember(dest => dest.Tipo, opt => opt.MapFrom(src => TipoConta.ContaCorrente));
         }
     }

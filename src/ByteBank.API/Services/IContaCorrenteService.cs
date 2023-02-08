@@ -8,14 +8,14 @@ namespace ByteBank.API.Services
 {
     public interface IContaCorrenteService
     {
-        Task<IEnumerable<ContaCorrenteDto>> BuscaContasCorrentesAsync();
+        Task<IEnumerable<ContaCorrenteViewModel>> BuscaContasCorrentesAsync();
 
-        Task<IEnumerable<ContaCorrenteDto>> BuscaContasCorrentesPaginadoAsync(int pagina, int tamanhoPagina);
+        Task<IEnumerable<ContaCorrenteViewModel>> BuscaContasCorrentesPaginadoAsync(int pagina, int tamanhoPagina);
 
-        Task<IEnumerable<ContaCorrenteDto>> BuscaContasCorrentesPorCpfTitularAsync(string cpf);
+        Task<IEnumerable<ContaCorrenteViewModel>> BuscaContasCorrentesPorCpfTitularAsync(string cpf);
 
-        Task<IEnumerable<ContaCorrenteDto>> BuscaContasCorrentesPorNomeTitularAsync(string nome);
+        Task<IEnumerable<ContaCorrenteViewModel>> BuscaContasCorrentesPorNomeTitularAsync(string nome);
 
-        Task<ContaCorrenteDto?> BuscaContaCorrentePorIdAsync(int id);
+        Task<ContaCorrenteViewModel?> BuscaContaCorrentePorIdAsync(int id);
     }
 }

@@ -1,14 +1,12 @@
-// <copyright file="ContaCorrenteDto.cs" company="PlaceholderCompany">
+// <copyright file="ContaCorrenteViewModel.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
 using System.ComponentModel.DataAnnotations;
 
-using ByteBank.API.Enums;
-
 namespace ByteBank.API.Dtos
 {
-    public class ContaCorrenteDto
+    public class ContaCorrenteViewModel
     {
         public int Id { get; set; }
 

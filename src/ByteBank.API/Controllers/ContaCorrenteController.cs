@@ -22,14 +22,14 @@ namespace ByteBank.API.Controllers
 
         // GET: api/ContaCorrente
         [HttpGet]
-        public async Task<IEnumerable<ContaCorrenteDto>> BuscaContasCorrentesAsync()
+        public async Task<IEnumerable<ContaCorrenteViewModel>> BuscaContasCorrentesAsync()
         {
             return await this.service.BuscaContasCorrentesAsync();
         }
 
         // GET: api/ContaCorrente/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ContaCorrenteDto>> BuscaContaCorrentePorIdAsync(int id)
+        public async Task<ActionResult<ContaCorrenteViewModel>> BuscaContaCorrentePorIdAsync(int id)
         {
             var conta = await this.service.BuscaContaCorrentePorIdAsync(id);
 
@@ -43,21 +43,21 @@ namespace ByteBank.API.Controllers
 
         // GET: api/ContaCorrente/cpf/12345678901
         [HttpGet("cpf/{cpf}")]
-        public async Task<IEnumerable<ContaCorrenteDto>> BuscaContasCorrentesPorCpfTitularAsync(string cpf)
+        public async Task<IEnumerable<ContaCorrenteViewModel>> BuscaContasCorrentesPorCpfTitularAsync(string cpf)
         {
             return await this.service.BuscaContasCorrentesPorCpfTitularAsync(cpf);
         }
 
         // GET: api/ContaCorrente/nome/Joao
         [HttpGet("nome/{nome}")]
-        public async Task<IEnumerable<ContaCorrenteDto>> BuscaContasCorrentesPorNomeTitularAsync(string nome)
+        public async Task<IEnumerable<ContaCorrenteViewModel>> BuscaContasCorrentesPorNomeTitularAsync(string nome)
         {
             return await this.service.BuscaContasCorrentesPorNomeTitularAsync(nome);
         }
 
         // GET: api/ContaCorrente/paginado[?pagina=1&tamanhoPagina=10]
         [HttpGet("paginado")]
-        public async Task<IEnumerable<ContaCorrenteDto>> BuscaContasCorrentesPaginadoAsync(int pagina = 1, int tamanhoPagina = 10)
+        public async Task<IEnumerable<ContaCorrenteViewModel>> BuscaContasCorrentesPaginadoAsync(int pagina = 1, int tamanhoPagina = 10)
         {
             return await this.service.BuscaContasCorrentesPaginadoAsync(pagina, tamanhoPagina);
         }

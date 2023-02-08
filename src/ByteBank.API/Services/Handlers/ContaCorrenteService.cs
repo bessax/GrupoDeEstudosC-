@@ -21,34 +21,34 @@ namespace ByteBank.API.Services.Handlers
             this.repository = repository;
         }
 
-        public async Task<ContaCorrenteDto?> BuscaContaCorrentePorIdAsync(int id)
+        public async Task<ContaCorrenteViewModel?> BuscaContaCorrentePorIdAsync(int id)
         {
             var contaCorrente = await this.repository.BuscaPorIdAsync(id);
-            return this.mapper.Map<ContaCorrenteDto>(contaCorrente);
+            return this.mapper.Map<ContaCorrenteViewModel>(contaCorrente);
         }
 
-        public async Task<IEnumerable<ContaCorrenteDto>> BuscaContasCorrentesAsync()
+        public async Task<IEnumerable<ContaCorrenteViewModel>> BuscaContasCorrentesAsync()
         {
             var contasCorrentes = await this.repository.BuscaTodosAsync();
-            return this.mapper.Map<IEnumerable<ContaCorrenteDto>>(contasCorrentes);
+            return this.mapper.Map<IEnumerable<ContaCorrenteViewModel>>(contasCorrentes);
         }
 
-        public async Task<IEnumerable<ContaCorrenteDto>> BuscaContasCorrentesPaginadoAsync(int pagina, int tamanhoPagina)
+        public async Task<IEnumerable<ContaCorrenteViewModel>> BuscaContasCorrentesPaginadoAsync(int pagina, int tamanhoPagina)
         {
             var contasCorrentes = await this.repository.BuscaTodosPaginadoAsync(pagina, tamanhoPagina);
-            return this.mapper.Map<IEnumerable<ContaCorrenteDto>>(contasCorrentes);
+            return this.mapper.Map<IEnumerable<ContaCorrenteViewModel>>(contasCorrentes);
         }
 
-        public async Task<IEnumerable<ContaCorrenteDto>> BuscaContasCorrentesPorCpfTitularAsync(string cpf)
+        public async Task<IEnumerable<ContaCorrenteViewModel>> BuscaContasCorrentesPorCpfTitularAsync(string cpf)
         {
             var contasCorrentes = await this.repository.BuscaPorCpfTitularAsync(cpf);
-            return this.mapper.Map<IEnumerable<ContaCorrenteDto>>(contasCorrentes);
+            return this.mapper.Map<IEnumerable<ContaCorrenteViewModel>>(contasCorrentes);
         }
 
-        public async Task<IEnumerable<ContaCorrenteDto>> BuscaContasCorrentesPorNomeTitularAsync(string nome)
+        public async Task<IEnumerable<ContaCorrenteViewModel>> BuscaContasCorrentesPorNomeTitularAsync(string nome)
         {
             var contasCorrentes = await this.repository.BuscaPorNomeTitularAsync(nome);
-            return this.mapper.Map<IEnumerable<ContaCorrenteDto>>(contasCorrentes);
+            return this.mapper.Map<IEnumerable<ContaCorrenteViewModel>>(contasCorrentes);
         }
     }
 }
