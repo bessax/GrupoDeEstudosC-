@@ -4,9 +4,9 @@
 
 using AutoMapper;
 
-using ByteBank.API.Dtos;
 using ByteBank.API.Enums;
 using ByteBank.API.Models;
+using ByteBank.API.ViewModels;
 
 namespace ByteBank.API.Profiles
 {

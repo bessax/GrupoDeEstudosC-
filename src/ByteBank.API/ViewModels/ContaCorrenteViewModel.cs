@@ -4,7 +4,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
-namespace ByteBank.API.Dtos
+namespace ByteBank.API.ViewModels
 {
     public class ContaCorrenteViewModel
     {

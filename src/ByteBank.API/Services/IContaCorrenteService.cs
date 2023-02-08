@@ -2,7 +2,7 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-using ByteBank.API.Dtos;
+using ByteBank.API.ViewModels;
 
 namespace ByteBank.API.Services
 {

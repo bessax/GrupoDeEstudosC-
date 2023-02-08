@@ -2,8 +2,8 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-using ByteBank.API.Dtos;
 using ByteBank.API.Services;
+using ByteBank.API.ViewModels;
 
 using Microsoft.AspNetCore.Mvc;
 
