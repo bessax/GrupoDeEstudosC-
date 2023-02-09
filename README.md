@@ -51,6 +51,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [Swagger](https://swagger.io/) - Documentação da API
 
 <!-- Author -->
+
 ## ✒️ Autor
 
-* **André Bessa** - *Desenvolvedor* - [bessax](https://github.com/bessax)
+- **André Bessa** - _Desenvolvedor_ - [bessax](https://github.com/bessax)
