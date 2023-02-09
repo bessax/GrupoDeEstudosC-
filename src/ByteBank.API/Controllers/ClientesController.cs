@@ -1,8 +1,8 @@
-// <copyright file="ClientesController.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
 using ByteBank.API.Data;
 using ByteBank.API.Models;
+using ByteBank.API.Request;
+using ByteBank.API.Services;
+using ByteBank.API.ViewModels;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,10 +14,12 @@ namespace ByteBank.API.Controllers
     public class ClientesController : ControllerBase
     {
         private readonly ByteBankContext context;
+        private readonly IClienteService service;
 
-        public ClientesController(ByteBankContext context)
+        public ClientesController(ByteBankContext context, IClienteService service)
         {
             this.context = context;
+            this.service = service;
         }
 
         // GET: api/Clientes
@@ -91,17 +93,16 @@ namespace ByteBank.API.Controllers
         // POST: api/Clientes
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Cliente>> PostCliente(Cliente cliente)
+        public async Task<ActionResult<Cliente>> PostCliente(ClienteRequest cliente)
         {
             if (this.context.Clientes == null)
             {
                 return this.Problem("Entity set 'ByteBankContext.Clientes'  is null.");
             }
 
-            this.context.Clientes.Add(cliente);
-            await this.context.SaveChangesAsync();
+            ClienteViewModel clienteView = await this.service.CriarClienteAsync(cliente);
 
-            return this.CreatedAtAction("GetCliente", new { id = cliente.Id }, cliente);
+            return this.CreatedAtAction("GetCliente", new { id = clienteView.Id }, cliente);
         }
 
         // DELETE: api/Clientes/5
