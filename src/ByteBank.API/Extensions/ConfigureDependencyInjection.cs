@@ -6,7 +6,6 @@ using ByteBank.API.Data;
 using ByteBank.API.Interface;
 using ByteBank.API.Models;
 using ByteBank.API.Repository;
-using ByteBank.API.Repository.EFCore;
 using ByteBank.API.Services;
 using ByteBank.API.Services.Handlers;
 
