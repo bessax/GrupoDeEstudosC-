@@ -2,7 +2,6 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-using ByteBank.API.Models;
 using ByteBank.API.Request;
 using ByteBank.API.Services;
 using ByteBank.API.ViewModels;
@@ -56,11 +55,6 @@ namespace ByteBank.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAgencia(int id, AgenciaRequest agencia)
         {
-            //realizar validação do dados  
-            // if (id != agencia.Id)
-            // {
-            //     return this.BadRequest();
-            // }
 
             return await this.service.AlteraAgenciaAsync(agencia) ? this.NoContent() : this.NotFound();
         }
@@ -68,7 +62,7 @@ namespace ByteBank.API.Controllers
         // POST: api/Agencias
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Agencia>> PostAgencia(AgenciaRequest agencia)
+        public async Task<ActionResult<AgenciaViewModel>> PostAgencia(AgenciaRequest agencia)
         {
             if (await this.service.BuscaAgenciasAsync() == null)
             {
