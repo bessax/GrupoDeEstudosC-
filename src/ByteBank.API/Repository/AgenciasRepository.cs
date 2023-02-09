@@ -7,7 +7,7 @@ using ByteBank.API.Models;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace ByteBank.API.Repository.EFCore
+namespace ByteBank.API.Repository
 {
     public class AgenciasRepository : IRepository<Agencia>
     {
