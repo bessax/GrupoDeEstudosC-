@@ -1,8 +1,4 @@
-﻿// <copyright file="EnderecoAgenciaRepository.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
-using ByteBank.API.Base;
+﻿using ByteBank.API.Base;
 using ByteBank.API.Data;
 using ByteBank.API.Interface;
 using ByteBank.API.Models;
