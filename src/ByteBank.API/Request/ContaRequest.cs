@@ -1,3 +1,6 @@
+// <copyright file="ContaRequest.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 using System.ComponentModel.DataAnnotations;
 
 using ByteBank.API.Enums;
@@ -12,7 +15,7 @@ public class ContaRequest
     public required double Saldo { get; set; }
     [Required(ErrorMessage = "A chave pix é obrigatória")]
     public required string ChavePix { get; set; }
-
+    //falta verificar e definir como atribuir valor
     public required TipoConta Tipo { get; set; }
     [Range(1, int.MaxValue, ErrorMessage = "O id da agência deve ser maior que zero")]
     public required int AgenciaId { get; set; }

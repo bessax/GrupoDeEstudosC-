@@ -1,4 +1,6 @@
-
+// <copyright file="AgenciaViewModel.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 using ByteBank.API.Models;
 namespace ByteBank.API.ViewModels;
 public class AgenciaViewModel

@@ -1,3 +1,6 @@
+// <copyright file="AgenciaProfile.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 using AutoMapper;
 
 using ByteBank.API.Models;
@@ -10,7 +13,7 @@ namespace ByteBank.API.Profiles
     {
         public AgenciaProfile()
         {
-            CreateMap<AgenciaRequest, Agencia>().ForMember(a => a.Endereco, r => r.MapFrom(r => new EnderecoAgencia()
+            this.CreateMap<AgenciaRequest, Agencia>().ForMember(a => a.Endereco, r => r.MapFrom(r => new EnderecoAgencia()
             {
                 Logradouro = r.Endereco.Logradouro,
                 Numero = r.Endereco.Numero,
@@ -18,7 +21,7 @@ namespace ByteBank.API.Profiles
                 Cep = r.Endereco.Cep
             }));
 
-            CreateMap<Agencia, AgenciaViewModel>();
+            this.CreateMap<Agencia, AgenciaViewModel>();
         }
     }
 }

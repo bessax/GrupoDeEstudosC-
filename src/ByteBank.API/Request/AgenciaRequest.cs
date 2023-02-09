@@ -1,3 +1,6 @@
+// <copyright file="AgenciaRequest.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 using System.ComponentModel.DataAnnotations;
 
 namespace ByteBank.API.Request;
