@@ -1,7 +1,3 @@
-// <copyright file="IContaCorrenteService.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
 using ByteBank.API.ViewModels;
 
 namespace ByteBank.API.Services

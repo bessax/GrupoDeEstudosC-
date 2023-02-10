@@ -1,7 +1,3 @@
-// <copyright file="ByteBankContext.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
 using ByteBank.API.Models;
 
 using Microsoft.EntityFrameworkCore;

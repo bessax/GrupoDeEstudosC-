@@ -1,5 +1,3 @@
-
-
 using ByteBank.API.Base;
 using ByteBank.API.Models;
 

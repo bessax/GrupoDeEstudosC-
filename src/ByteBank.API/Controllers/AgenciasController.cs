@@ -1,13 +1,8 @@
-// <copyright file="AgenciasController.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
 using ByteBank.API.Request;
 using ByteBank.API.Services;
 using ByteBank.API.ViewModels;
 
 using Microsoft.AspNetCore.Mvc;
-
 
 namespace ByteBank.API.Controllers
 {
