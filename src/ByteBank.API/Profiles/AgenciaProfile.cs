@@ -1,7 +1,3 @@
-// <copyright file="AgenciaProfile.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
 using AutoMapper;
 
 using ByteBank.API.Models;
