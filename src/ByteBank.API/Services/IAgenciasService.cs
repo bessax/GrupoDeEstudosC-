@@ -2,19 +2,20 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-using ByteBank.API.Models;
+using ByteBank.API.Request;
+using ByteBank.API.ViewModels;
 
 namespace ByteBank.API.Services
 {
     public interface IAgenciasService
     {
-        Task<bool> AlteraAgenciaAsync(Agencia agencia);
+        Task<bool> AlteraAgenciaAsync(AgenciaRequest agenciaRequest);
 
-        Task<Agencia?> BuscaAgenciaPorIdAsync(int id);
+        Task<AgenciaViewModel?> BuscaAgenciaPorIdAsync(int id);
 
-        Task<List<Agencia>?> BuscaAgenciasAsync();
+        Task<List<AgenciaViewModel>?> BuscaAgenciasAsync();
 
-        Task<Agencia> CriaAgenciaAsync(Agencia agencia);
+        Task<AgenciaViewModel> CriaAgenciaAsync(AgenciaRequest agenciaRequest);
 
         Task<bool> DeletaAgenciaAsync(int id);
     }

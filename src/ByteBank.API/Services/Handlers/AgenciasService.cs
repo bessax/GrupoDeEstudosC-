@@ -1,9 +1,9 @@
-// <copyright file="AgenciasService.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
+using AutoMapper;
 
 using ByteBank.API.Models;
 using ByteBank.API.Repository;
+using ByteBank.API.Request;
+using ByteBank.API.ViewModels;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -12,18 +12,21 @@ namespace ByteBank.API.Services.Handlers
     public class AgenciasService : IAgenciasService
     {
         private readonly IRepository<Agencia> repository;
+        private readonly IMapper _mapper;
 
-        public AgenciasService(IRepository<Agencia> repository)
+        public AgenciasService(IRepository<Agencia> repository, IMapper mapper)
         {
             this.repository = repository;
+            _mapper = mapper;
         }
 
-        public async Task<List<Agencia>?> BuscaAgenciasAsync()
+        public async Task<List<AgenciaViewModel>?> BuscaAgenciasAsync()
         {
-            return await this.repository.BuscaTodosAsync();
+            var agencia = await this.repository.BuscaTodosAsync();
+            return _mapper.Map<List<AgenciaViewModel>>(agencia);
         }
 
-        public async Task<Agencia?> BuscaAgenciaPorIdAsync(int id)
+        public async Task<AgenciaViewModel?> BuscaAgenciaPorIdAsync(int id)
         {
             if (await this.repository.BuscaTodosAsync() == null)
             {
@@ -37,11 +40,12 @@ namespace ByteBank.API.Services.Handlers
                 return null;
             }
 
-            return agencia;
+            return _mapper.Map<AgenciaViewModel>(agencia);
         }
 
-        public async Task<bool> AlteraAgenciaAsync(Agencia agencia)
+        public async Task<bool> AlteraAgenciaAsync(AgenciaRequest agenciaRequest)
         {
+            var agencia = _mapper.Map<Agencia>(agenciaRequest);
             try
             {
                 await this.repository.AlteraAsync(agencia);
@@ -61,10 +65,12 @@ namespace ByteBank.API.Services.Handlers
             return true;
         }
 
-        public async Task<Agencia> CriaAgenciaAsync(Agencia agencia)
+        public async Task<AgenciaViewModel> CriaAgenciaAsync(AgenciaRequest agenciaRequest)
         {
+            var agencia = _mapper.Map<Agencia>(agenciaRequest);
+
             await this.repository.CriarAsync(agencia);
-            return agencia;
+            return _mapper.Map<AgenciaViewModel>(agencia);
         }
 
         public async Task<bool> DeletaAgenciaAsync(int id)

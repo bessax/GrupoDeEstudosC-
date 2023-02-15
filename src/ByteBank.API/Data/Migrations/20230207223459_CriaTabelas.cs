@@ -1,8 +1,4 @@
-﻿// <copyright file="20230207223459_CriaTabelas.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
-using System;
+﻿using System;
 
 using Microsoft.EntityFrameworkCore.Migrations;
 

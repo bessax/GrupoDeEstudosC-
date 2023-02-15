@@ -1,7 +1,3 @@
-// <copyright file="IRepository.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
 namespace ByteBank.API.Repository
 {
     public interface IRepository<T>

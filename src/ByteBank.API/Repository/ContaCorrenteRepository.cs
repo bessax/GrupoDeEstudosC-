@@ -1,7 +1,3 @@
-// <copyright file="ContaCorrenteRepository.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
 using ByteBank.API.Data;
 using ByteBank.API.Enums;
 using ByteBank.API.Interface;

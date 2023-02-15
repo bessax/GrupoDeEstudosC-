@@ -6,7 +6,6 @@ using ByteBank.API.Data;
 using ByteBank.API.Interface;
 using ByteBank.API.Models;
 using ByteBank.API.Repository;
-using ByteBank.API.Repository.EFCore;
 using ByteBank.API.Services;
 using ByteBank.API.Services.Handlers;
 
@@ -28,6 +27,7 @@ public static class ConfigureDependencyInjection
         services.AddScoped<IContaCorrenteRepository, ContaCorrenteRepository>();
         services.AddScoped<IAgenciasService, AgenciasService>();
         services.AddScoped<IContaCorrenteService, ContaCorrenteService>();
+        services.AddScoped<IClienteService, ClienteService>();
         services.AddTransient<IClienteRepository, ClienteRepository>();
         services.AddTransient<IEnderecoAgenciaRepository, EnderecoAgenciaRepository>();
     }

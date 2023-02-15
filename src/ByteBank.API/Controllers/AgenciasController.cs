@@ -1,13 +1,8 @@
-// <copyright file="AgenciasController.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
-using ByteBank.API.Models;
-using ByteBank.API.Repository;
+using ByteBank.API.Request;
 using ByteBank.API.Services;
+using ByteBank.API.ViewModels;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace ByteBank.API.Controllers
 {
@@ -24,7 +19,7 @@ namespace ByteBank.API.Controllers
 
         // GET: api/Agencias
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Agencia>>> GetAgencias()
+        public async Task<ActionResult<IEnumerable<AgenciaViewModel>>> GetAgencias()
         {
             var agencias = await this.service.BuscaAgenciasAsync();
 
@@ -38,7 +33,7 @@ namespace ByteBank.API.Controllers
 
         // GET: api/Agencias/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Agencia>> GetAgencia(int id)
+        public async Task<ActionResult<AgenciaViewModel>> GetAgencia(int id)
         {
             var agencia = await this.service.BuscaAgenciaPorIdAsync(id);
 
@@ -53,12 +48,8 @@ namespace ByteBank.API.Controllers
         // PUT: api/Agencias/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAgencia(int id, Agencia agencia)
+        public async Task<IActionResult> PutAgencia(int id, AgenciaRequest agencia)
         {
-            if (id != agencia.Id)
-            {
-                return this.BadRequest();
-            }
 
             return await this.service.AlteraAgenciaAsync(agencia) ? this.NoContent() : this.NotFound();
         }
@@ -66,7 +57,7 @@ namespace ByteBank.API.Controllers
         // POST: api/Agencias
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Agencia>> PostAgencia(Agencia agencia)
+        public async Task<ActionResult<AgenciaViewModel>> PostAgencia(AgenciaRequest agencia)
         {
             if (await this.service.BuscaAgenciasAsync() == null)
             {

@@ -1,13 +1,9 @@
-// <copyright file="AgenciasRepository.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
 using ByteBank.API.Data;
 using ByteBank.API.Models;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace ByteBank.API.Repository.EFCore
+namespace ByteBank.API.Repository
 {
     public class AgenciasRepository : IRepository<Agencia>
     {
