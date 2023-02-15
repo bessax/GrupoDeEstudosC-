@@ -1,7 +1,11 @@
-using AutoMapper;
+// <copyright file="ContaCorrenteService.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
-using ByteBank.API.Interface;
+using AutoMapper;
 using ByteBank.API.Models;
+using ByteBank.API.Repository.Interface;
+using ByteBank.API.Services.Interfaces;
 using ByteBank.API.ViewModels;
 
 namespace ByteBank.API.Services.Handlers

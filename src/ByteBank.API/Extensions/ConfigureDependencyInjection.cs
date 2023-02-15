@@ -3,11 +3,11 @@
 // </copyright>
 
 using ByteBank.API.Data;
-using ByteBank.API.Interface;
 using ByteBank.API.Models;
 using ByteBank.API.Repository;
-using ByteBank.API.Services;
+using ByteBank.API.Repository.Interface;
 using ByteBank.API.Services.Handlers;
+using ByteBank.API.Services.Interfaces;
 
 namespace ByteBank.API.Extensions;
 

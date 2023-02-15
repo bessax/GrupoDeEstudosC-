@@ -1,4 +1,8 @@
-using ByteBank.API.Services;
+// <copyright file="ContaCorrenteController.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+using ByteBank.API.Services.Interfaces;
 using ByteBank.API.ViewModels;
 
 using Microsoft.AspNetCore.Mvc;

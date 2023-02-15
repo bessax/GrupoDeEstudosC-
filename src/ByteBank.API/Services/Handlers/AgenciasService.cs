@@ -1,8 +1,9 @@
 using AutoMapper;
 
 using ByteBank.API.Models;
-using ByteBank.API.Repository;
+using ByteBank.API.Repository.Interface;
 using ByteBank.API.Request;
+using ByteBank.API.Services.Interfaces;
 using ByteBank.API.ViewModels;
 
 using Microsoft.EntityFrameworkCore;

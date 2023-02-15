@@ -1,5 +1,5 @@
-﻿using ByteBank.API.Interface;
-using ByteBank.API.Models;
+﻿using ByteBank.API.Models;
+using ByteBank.API.Repository.Interface;
 using ByteBank.API.Services;
 
 using Microsoft.AspNetCore.Mvc;

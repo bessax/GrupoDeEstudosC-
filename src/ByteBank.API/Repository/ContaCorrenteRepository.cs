@@ -1,8 +1,7 @@
 using ByteBank.API.Data;
 using ByteBank.API.Enums;
-using ByteBank.API.Interface;
 using ByteBank.API.Models;
-
+using ByteBank.API.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
 
 namespace ByteBank.API.Repository

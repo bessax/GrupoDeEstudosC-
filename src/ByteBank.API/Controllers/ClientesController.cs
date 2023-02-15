@@ -1,7 +1,7 @@
 using ByteBank.API.Data;
 using ByteBank.API.Models;
 using ByteBank.API.Request;
-using ByteBank.API.Services;
+using ByteBank.API.Services.Interfaces;
 using ByteBank.API.ViewModels;
 
 using Microsoft.AspNetCore.Mvc;

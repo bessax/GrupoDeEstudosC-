@@ -1,6 +1,6 @@
 using ByteBank.API.Models;
-
 namespace ByteBank.API.ViewModels;
+
 public class AgenciaViewModel
 {
     required public int Id { get; set; }

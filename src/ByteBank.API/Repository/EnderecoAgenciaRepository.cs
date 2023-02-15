@@ -1,7 +1,7 @@
 ﻿using ByteBank.API.Base;
 using ByteBank.API.Data;
-using ByteBank.API.Interface;
 using ByteBank.API.Models;
+using ByteBank.API.Repository.Interface;
 
 namespace ByteBank.API.Repository;
 

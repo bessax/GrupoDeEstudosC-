@@ -1,7 +1,8 @@
 using ByteBank.API.Request;
-using ByteBank.API.Services;
+using ByteBank.API.Services.Interfaces;
+using ByteBank.API.Validator;
 using ByteBank.API.ViewModels;
-
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ByteBank.API.Controllers
