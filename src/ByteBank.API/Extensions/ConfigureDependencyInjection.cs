@@ -8,6 +8,7 @@ using ByteBank.API.Repository;
 using ByteBank.API.Repository.Interface;
 using ByteBank.API.Services.Handlers;
 using ByteBank.API.Services.Interfaces;
+using System.Runtime.CompilerServices;
 
 namespace ByteBank.API.Extensions;
 
@@ -21,7 +22,6 @@ public static class ConfigureDependencyInjection
     internal static void ConfigureAppServices(IServiceCollection services)
     {
         services.AddAutoMapper(typeof(Program));
-
         services.AddScoped<ByteBankContext>();
         services.AddScoped<IRepository<Agencia>, AgenciasRepository>();
         services.AddScoped<IContaCorrenteRepository, ContaCorrenteRepository>();
@@ -29,6 +29,7 @@ public static class ConfigureDependencyInjection
         services.AddScoped<IContaCorrenteService, ContaCorrenteService>();
         services.AddScoped<IClienteService, ClienteService>();
         services.AddTransient<IClienteRepository, ClienteRepository>();
+        services.AddScoped<IEnderecoAgenciasService,EnderecoAgenciasService>();
         services.AddTransient<IEnderecoAgenciaRepository, EnderecoAgenciaRepository>();
     }
 }

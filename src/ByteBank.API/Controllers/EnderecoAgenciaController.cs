@@ -1,7 +1,7 @@
-﻿using ByteBank.API.Models;
-using ByteBank.API.Repository.Interface;
-using ByteBank.API.Services;
-
+﻿using ByteBank.API.Request;
+using ByteBank.API.Services.Interfaces;
+using ByteBank.API.Validator;
+using ByteBank.API.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ByteBank.API.Controllers;
@@ -10,24 +10,40 @@ namespace ByteBank.API.Controllers;
 [ApiController]
 public class EnderecoAgenciaController : ControllerBase
 {
-    private readonly IEnderecoAgenciaRepository repository;
+    private readonly IEnderecoAgenciasService service;
+    private readonly EnderecoAgenciaValidator validador;
 
-    public EnderecoAgenciaController(IEnderecoAgenciaRepository repository)
+    public EnderecoAgenciaController(IEnderecoAgenciasService _service)
     {
-        this.repository = repository;
+        this.service = _service;
+        this.validador = new EnderecoAgenciaValidator();
     }
 
-    // GET: api/Agencias
+    // GET: api/EnderecoAgencias
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<EnderecoAgencia>>> GetEnrecoAgencias()
+    public async Task<ActionResult<List<EnderecoAgenciaRequest>>> GetEnrecoAgencias()
     {
-        var enderecoAgencia = await this.repository.BuscaTodosAsync();
+        var enderecoAgencia = await this.service.BuscaEnderecoAgenciasAsync();
 
         if (enderecoAgencia == null)
         {
-            return this.NotFound();
+            return this.NotFound("Não há dados a serem exibidos.");
         }
 
-        return enderecoAgencia;
+        return this.Ok(enderecoAgencia);
+    }
+
+    // POST: api/EnderecoAgencias
+    [HttpPost]
+    public async Task<ActionResult<EnderecoAgenciaViewModel>> PostEnderecoAgencia(EnderecoAgenciaRequest enderecoAgencia)
+    {
+        if (await this.service.BuscaEnderecoAgenciasAsync() == null)
+        {
+            return this.Problem("Não existe dados a serem retornados.");
+        }
+        
+        var enderecoAgenciaCriada = await this.service.CriaEnderecoAgenciaAsync(enderecoAgencia);
+
+        return this.Ok(enderecoAgenciaCriada);
     }
 }
