@@ -15,7 +15,7 @@ public class EnderecoAgenciaController : ControllerBase
 
     private readonly IValidator<EnderecoAgenciaRequest> validator;
 
-    public EnderecoAgenciaController(IEnderecoAgenciasService _service,IValidator<EnderecoAgenciaRequest> _validator)
+    public EnderecoAgenciaController(IEnderecoAgenciasService _service, IValidator<EnderecoAgenciaRequest> _validator)
     {
         this.service = _service;
         this.validator = _validator;
@@ -23,7 +23,7 @@ public class EnderecoAgenciaController : ControllerBase
 
     // GET: api/EnderecoAgencias
     [HttpGet]
-    public async Task<ActionResult<List<EnderecoAgenciaRequest>>> GetEnrecoAgencias()
+    public async Task<ActionResult<List<EnderecoAgenciaRequest>>> GetEnderecoAgencias()
     {
         var enderecoAgencia = await this.service.BuscaEnderecoAgenciasAsync();
 
@@ -41,7 +41,7 @@ public class EnderecoAgenciaController : ControllerBase
     {
         var validation = await validator.ValidateAsync(enderecoAgencia);
         if (!validation.IsValid)
-        {         
+        {
             return this.BadRequest(validation.ToDictionary());
         }
 
@@ -49,9 +49,20 @@ public class EnderecoAgenciaController : ControllerBase
         {
             return this.Problem("Não existe dados a serem retornados.");
         }
-        
+
         var enderecoAgenciaCriada = await this.service.CriaEnderecoAgenciaAsync(enderecoAgencia);
 
         return this.Ok(enderecoAgenciaCriada);
+    }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<EnderecoAgenciaViewModel>> GetEnderecoAgenciaPorId(int id)
+    {
+        var enderecoAgencia = await service.BuscaEnderecoAgenciaPorIdAsync(id);
+        if (enderecoAgencia == null)
+        {
+            return this.Problem("Não existe dados a serem retornados.");
+        }
+        return this.Ok(enderecoAgencia);
     }
 }

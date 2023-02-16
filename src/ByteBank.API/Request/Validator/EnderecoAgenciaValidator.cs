@@ -23,7 +23,7 @@ namespace ByteBank.API.Request.Validator
                 .NotNull()
                 .WithMessage("O campo logradouro é obrigatório")
                 .MinimumLength(10).WithMessage("Mínimo de 10 caracteres")
-                .MaximumLength(20).WithMessage("Máximo de 20 caracteres");
+                .MaximumLength(60).WithMessage("Máximo de 60 caracteres");
 
             RuleFor(a => a.Complemento)
                .NotNull()
