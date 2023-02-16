@@ -21,7 +21,7 @@ public class BaseRepository<T> : IBaseRepository<T>
         await this.context.SaveChangesAsync();
     }
 
-    public async Task<T?> BuscaPorIdAsync(int id)
+    public virtual async Task<T?> BuscaPorIdAsync(int id)
     {
         return await this.context.Set<T>().FindAsync(id);
     }

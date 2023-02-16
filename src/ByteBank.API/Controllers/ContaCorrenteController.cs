@@ -1,7 +1,4 @@
-// <copyright file="ContaCorrenteController.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
+using ByteBank.API.Request;
 using ByteBank.API.Services.Interfaces;
 using ByteBank.API.ViewModels;
 
@@ -11,7 +8,7 @@ namespace ByteBank.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ContaCorrenteController
+    public class ContaCorrenteController : ControllerBase
     {
         private readonly IContaCorrenteService service;
 
@@ -60,6 +57,17 @@ namespace ByteBank.API.Controllers
         public async Task<IEnumerable<ContaCorrenteViewModel>> BuscaContasCorrentesPaginadoAsync(int pagina = 1, int tamanhoPagina = 10)
         {
             return await this.service.BuscaContasCorrentesPaginadoAsync(pagina, tamanhoPagina);
+        }
+
+        //POST: api/ContaCorrente/clienteId/1
+        [HttpPost("clienteId/{id}")]
+        public async Task<ActionResult<ContaCorrenteViewModel>> PostContaCorrente(int id, ContaRequest contaRequest)
+        {
+            ContaCorrenteViewModel? contaCorrenteView = await this.service.CriaContaAsync(id, contaRequest);
+
+            if (contaCorrenteView is null) return this.NotFound($"Cliente id: {id} não encontrado.");
+
+            return this.Ok(contaCorrenteView);
         }
     }
 }

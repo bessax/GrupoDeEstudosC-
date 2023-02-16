@@ -5,6 +5,7 @@
 using AutoMapper;
 using ByteBank.API.Models;
 using ByteBank.API.Repository.Interface;
+using ByteBank.API.Request;
 using ByteBank.API.Services.Interfaces;
 using ByteBank.API.ViewModels;
 
@@ -14,11 +15,13 @@ namespace ByteBank.API.Services.Handlers
     {
         private readonly IMapper mapper;
         private readonly IContaCorrenteRepository repository;
+        private readonly IClienteRepository clienteRepository;
 
-        public ContaCorrenteService(IMapper mapper, IContaCorrenteRepository repository)
+        public ContaCorrenteService(IMapper mapper, IContaCorrenteRepository repository, IClienteRepository clienteRepository)
         {
             this.mapper = mapper;
             this.repository = repository;
+            this.clienteRepository = clienteRepository;
         }
 
         public async Task<ContaCorrenteViewModel?> BuscaContaCorrentePorIdAsync(int id)
@@ -49,6 +52,22 @@ namespace ByteBank.API.Services.Handlers
         {
             var contasCorrentes = await this.repository.BuscaPorNomeTitularAsync(nome);
             return this.mapper.Map<IEnumerable<ContaCorrenteViewModel>>(contasCorrentes);
+        }
+
+        public async Task<ContaCorrenteViewModel?> CriaContaAsync(int id, ContaRequest contaRequest)
+        {
+            var cliente = await this.clienteRepository.BuscaPorIdAsync(id);
+            if (cliente is null) return null;
+
+            Conta conta = this.mapper.Map<Conta>(contaRequest);
+            conta.CriadoEm = DateTime.Now;
+
+            cliente.Contas.Add(conta);
+
+            await this.clienteRepository.AlteraAsync(id, cliente);
+
+            return this.mapper.Map<ContaCorrenteViewModel>(conta);
+
         }
     }
 }
