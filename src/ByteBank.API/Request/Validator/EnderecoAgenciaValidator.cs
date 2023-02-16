@@ -5,7 +5,7 @@ using Microsoft.SqlServer.Server;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.ConstrainedExecution;
 
-namespace ByteBank.API.Validator
+namespace ByteBank.API.Request.Validator
 {
     public class EnderecoAgenciaValidator : AbstractValidator<EnderecoAgenciaRequest>
     {
@@ -29,5 +29,5 @@ namespace ByteBank.API.Validator
                .NotNull()
                .WithMessage("O campo número é obrigatório");
         }
-    }    
+    }
 }

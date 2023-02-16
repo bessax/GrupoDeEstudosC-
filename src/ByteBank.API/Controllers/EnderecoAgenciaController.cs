@@ -1,8 +1,9 @@
 ﻿using ByteBank.API.Request;
 using ByteBank.API.Services.Interfaces;
-using ByteBank.API.Validator;
 using ByteBank.API.ViewModels;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace ByteBank.API.Controllers;
 
@@ -11,12 +12,13 @@ namespace ByteBank.API.Controllers;
 public class EnderecoAgenciaController : ControllerBase
 {
     private readonly IEnderecoAgenciasService service;
-    private readonly EnderecoAgenciaValidator validador;
 
-    public EnderecoAgenciaController(IEnderecoAgenciasService _service)
+    private readonly IValidator<EnderecoAgenciaRequest> validator;
+
+    public EnderecoAgenciaController(IEnderecoAgenciasService _service,IValidator<EnderecoAgenciaRequest> _validator)
     {
         this.service = _service;
-        this.validador = new EnderecoAgenciaValidator();
+        this.validator = _validator;
     }
 
     // GET: api/EnderecoAgencias
@@ -37,6 +39,12 @@ public class EnderecoAgenciaController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<EnderecoAgenciaViewModel>> PostEnderecoAgencia(EnderecoAgenciaRequest enderecoAgencia)
     {
+        var validation = await validator.ValidateAsync(enderecoAgencia);
+        if (!validation.IsValid)
+        {         
+            return this.BadRequest(validation.ToDictionary());
+        }
+
         if (await this.service.BuscaEnderecoAgenciasAsync() == null)
         {
             return this.Problem("Não existe dados a serem retornados.");

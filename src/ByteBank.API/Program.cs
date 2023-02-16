@@ -1,6 +1,7 @@
 using ByteBank.API.Data;
 using ByteBank.API.Extensions;
-
+using ByteBank.API.Request.Validator;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,8 +12,9 @@ builder.Services.AddDbContext<ByteBankContext>(options =>
     options.UseSqlServer("Name=ByteBankConnection");
 });
 
-builder.Services.ConfigureDI();
 
+
+builder.Services.ConfigureDI();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 

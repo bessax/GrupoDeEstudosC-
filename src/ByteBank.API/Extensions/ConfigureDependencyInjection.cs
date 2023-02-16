@@ -6,8 +6,12 @@ using ByteBank.API.Data;
 using ByteBank.API.Models;
 using ByteBank.API.Repository;
 using ByteBank.API.Repository.Interface;
+using ByteBank.API.Request;
+using ByteBank.API.Request.Validator;
 using ByteBank.API.Services.Handlers;
 using ByteBank.API.Services.Interfaces;
+using FluentValidation;
+using System;
 using System.Runtime.CompilerServices;
 
 namespace ByteBank.API.Extensions;
@@ -23,6 +27,7 @@ public static class ConfigureDependencyInjection
     {
         services.AddAutoMapper(typeof(Program));
         services.AddScoped<ByteBankContext>();
+        services.AddScoped<IValidator<EnderecoAgenciaRequest>, EnderecoAgenciaValidator>();
         services.AddScoped<IRepository<Agencia>, AgenciasRepository>();
         services.AddScoped<IContaCorrenteRepository, ContaCorrenteRepository>();
         services.AddScoped<IAgenciasService, AgenciasService>();
