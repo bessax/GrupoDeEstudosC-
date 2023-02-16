@@ -40,6 +40,7 @@ public class EnderecoAgenciaController : ControllerBase
     public async Task<ActionResult<EnderecoAgenciaViewModel>> PostEnderecoAgencia(EnderecoAgenciaRequest enderecoAgencia)
     {
         var validation = await validator.ValidateAsync(enderecoAgencia);
+
         if (!validation.IsValid)
         {
             return this.BadRequest(validation.ToDictionary());
