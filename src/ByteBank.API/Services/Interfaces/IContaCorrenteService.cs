@@ -1,3 +1,4 @@
+using ByteBank.API.Request;
 using ByteBank.API.ViewModels;
 
 namespace ByteBank.API.Services.Interfaces
@@ -11,7 +12,7 @@ namespace ByteBank.API.Services.Interfaces
         Task<IEnumerable<ContaCorrenteViewModel>> BuscaContasCorrentesPorCpfTitularAsync(string cpf);
 
         Task<IEnumerable<ContaCorrenteViewModel>> BuscaContasCorrentesPorNomeTitularAsync(string nome);
-
         Task<ContaCorrenteViewModel?> BuscaContaCorrentePorIdAsync(int id);
+        Task<ContaCorrenteViewModel?> CriaContaAsync(int id, ContaRequest contaRequest);
     }
 }

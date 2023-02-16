@@ -34,7 +34,7 @@ public static class ConfigureDependencyInjection
         services.AddScoped<IContaCorrenteService, ContaCorrenteService>();
         services.AddScoped<IClienteService, ClienteService>();
         services.AddTransient<IClienteRepository, ClienteRepository>();
-        services.AddScoped<IEnderecoAgenciasService,EnderecoAgenciasService>();
+        services.AddScoped<IEnderecoAgenciasService, EnderecoAgenciasService>();
         services.AddTransient<IEnderecoAgenciaRepository, EnderecoAgenciaRepository>();
     }
 }

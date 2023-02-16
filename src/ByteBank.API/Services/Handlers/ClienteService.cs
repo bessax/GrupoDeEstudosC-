@@ -9,18 +9,18 @@ namespace ByteBank.API.Services.Handlers;
 
 public class ClienteService : IClienteService
 {
-    private readonly IMapper _mapper;
-    private readonly IClienteRepository _clienteRepository;
+    private readonly IMapper mapper;
+    private readonly IClienteRepository clienteRepository;
 
     public ClienteService(IMapper mapper, IClienteRepository clienteRepository)
     {
-        _mapper = mapper;
-        _clienteRepository = clienteRepository;
+        this.mapper = mapper;
+        this.clienteRepository = clienteRepository;
     }
 
     public async Task<ClienteViewModel> CriarClienteAsync(ClienteRequest clienteRequest)
     {
-        Cliente cliente = _mapper.Map<Cliente>(clienteRequest);
+        Cliente cliente = this.mapper.Map<Cliente>(clienteRequest);
 
         foreach (var conta in cliente.Contas)
         {
@@ -28,8 +28,8 @@ public class ClienteService : IClienteService
             conta.AtualizadoEm = DateTime.Now;
         }
 
-        await _clienteRepository.CriarAsync(cliente);
+        await this.clienteRepository.CriarAsync(cliente);
 
-        return _mapper.Map<ClienteViewModel>(cliente);
+        return this.mapper.Map<ClienteViewModel>(cliente);
     }
 }
