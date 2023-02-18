@@ -1,7 +1,5 @@
 using ByteBank.API.Data;
 using ByteBank.API.Extensions;
-using ByteBank.API.Request.Validator;
-using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,7 +13,10 @@ builder.Services.AddDbContext<ByteBankContext>(options =>
 
 
 builder.Services.ConfigureDI();
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    options.SuppressAsyncSuffixInActionNames = false;
+});
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();

@@ -67,7 +67,8 @@ namespace ByteBank.API.Controllers
 
             if (contaCorrenteView is null) return this.NotFound($"Cliente id: {id} não encontrado.");
 
-            return this.Ok(contaCorrenteView);
+            return this.CreatedAtAction("BuscaContaCorrentePorIdAsync",
+             new { id = contaCorrenteView.Id }, contaCorrenteView);
         }
     }
 }
