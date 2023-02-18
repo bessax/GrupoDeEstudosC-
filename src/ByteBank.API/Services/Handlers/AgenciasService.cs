@@ -5,7 +5,7 @@ using ByteBank.API.Repository.Interface;
 using ByteBank.API.Request;
 using ByteBank.API.Services.Interfaces;
 using ByteBank.API.ViewModels;
-
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
 namespace ByteBank.API.Services.Handlers
@@ -13,18 +13,20 @@ namespace ByteBank.API.Services.Handlers
     public class AgenciasService : IAgenciasService
     {
         private readonly IRepository<Agencia> repository;
-        private readonly IMapper _mapper;
+        private readonly IMapper mapper;
+        private readonly IValidator<AgenciaRequest> validator;
 
-        public AgenciasService(IRepository<Agencia> repository, IMapper mapper)
+        public AgenciasService(IRepository<Agencia> repository, IMapper _mapper, IValidator<AgenciaRequest> validator)
         {
             this.repository = repository;
-            _mapper = mapper;
+            this.mapper = _mapper;
+            this.validator = validator;
         }
 
         public async Task<List<AgenciaViewModel>?> BuscaAgenciasAsync()
         {
             var agencia = await this.repository.BuscaTodosAsync();
-            return _mapper.Map<List<AgenciaViewModel>>(agencia);
+            return this.mapper.Map<List<AgenciaViewModel>>(agencia);
         }
 
         public async Task<AgenciaViewModel?> BuscaAgenciaPorIdAsync(int id)
@@ -41,12 +43,14 @@ namespace ByteBank.API.Services.Handlers
                 return null;
             }
 
-            return _mapper.Map<AgenciaViewModel>(agencia);
+            return this.mapper.Map<AgenciaViewModel>(agencia);
         }
 
         public async Task<bool> AlteraAgenciaAsync(AgenciaRequest agenciaRequest)
         {
-            var agencia = _mapper.Map<Agencia>(agenciaRequest);
+            await ValidaRequest(agenciaRequest);
+
+            var agencia = this.mapper.Map<Agencia>(agenciaRequest);
             try
             {
                 await this.repository.AlteraAsync(agencia);
@@ -68,10 +72,12 @@ namespace ByteBank.API.Services.Handlers
 
         public async Task<AgenciaViewModel> CriaAgenciaAsync(AgenciaRequest agenciaRequest)
         {
-            var agencia = _mapper.Map<Agencia>(agenciaRequest);
+            await ValidaRequest(agenciaRequest);
+
+            var agencia = this.mapper.Map<Agencia>(agenciaRequest);
 
             await this.repository.CriarAsync(agencia);
-            return _mapper.Map<AgenciaViewModel>(agencia);
+            return this.mapper.Map<AgenciaViewModel>(agencia);
         }
 
         public async Task<bool> DeletaAgenciaAsync(int id)
@@ -96,6 +102,15 @@ namespace ByteBank.API.Services.Handlers
         {
             var agencias = await this.repository.BuscaTodosAsync();
             return (agencias?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        private async Task ValidaRequest(AgenciaRequest agenciaRequest)
+        {
+            var validation = await this.validator.ValidateAsync(agenciaRequest);
+            if (!validation.IsValid)
+            {
+                throw new ArgumentException(validation.ToString());
+            }
         }
     }
 }

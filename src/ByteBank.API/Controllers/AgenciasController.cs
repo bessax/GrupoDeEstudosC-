@@ -49,8 +49,15 @@ namespace ByteBank.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAgencia(int id, AgenciaRequest agencia)
         {
+            try
+            {
+                return await this.service.AlteraAgenciaAsync(agencia) ? this.NoContent() : this.NotFound();
+            }
+            catch (System.Exception e)
+            {
+                return BadRequest(e.Message);
+            }
 
-            return await this.service.AlteraAgenciaAsync(agencia) ? this.NoContent() : this.NotFound();
         }
 
         // POST: api/Agencias
@@ -58,14 +65,16 @@ namespace ByteBank.API.Controllers
         [HttpPost]
         public async Task<ActionResult<AgenciaViewModel>> PostAgencia(AgenciaRequest agencia)
         {
-            if (await this.service.BuscaAgenciasAsync() == null)
+            try
             {
-                return this.Problem("Entity set 'ByteBankContext.Agencias'  is null.");
+                var agenciaCriada = await this.service.CriaAgenciaAsync(agencia);
+
+                return this.CreatedAtAction("GetAgencia", new { id = agenciaCriada.Id }, agenciaCriada);
             }
-
-            var agenciaCriada = await this.service.CriaAgenciaAsync(agencia);
-
-            return this.CreatedAtAction("GetAgencia", new { id = agenciaCriada.Id }, agenciaCriada);
+            catch (System.Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         // DELETE: api/Agencias/5

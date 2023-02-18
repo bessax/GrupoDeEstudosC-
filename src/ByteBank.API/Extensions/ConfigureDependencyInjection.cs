@@ -36,5 +36,6 @@ public static class ConfigureDependencyInjection
         services.AddTransient<IClienteRepository, ClienteRepository>();
         services.AddScoped<IEnderecoAgenciasService, EnderecoAgenciasService>();
         services.AddTransient<IEnderecoAgenciaRepository, EnderecoAgenciaRepository>();
+        services.AddScoped<IValidator<AgenciaRequest>, AgenciaValidator>();
     }
 }
