@@ -1,6 +1,7 @@
 using ByteBank.API.Request;
 using ByteBank.API.Services.Interfaces;
 using ByteBank.API.ViewModels;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ByteBank.API.Controllers
@@ -53,7 +54,7 @@ namespace ByteBank.API.Controllers
             {
                 return await this.service.AlteraAgenciaAsync(agencia) ? this.NoContent() : this.NotFound();
             }
-            catch (System.Exception e)
+            catch (ValidationException e)
             {
                 return BadRequest(e.Message);
             }
@@ -71,7 +72,7 @@ namespace ByteBank.API.Controllers
 
                 return this.CreatedAtAction("GetAgencia", new { id = agenciaCriada.Id }, agenciaCriada);
             }
-            catch (System.Exception e)
+            catch (ValidationException e)
             {
                 return BadRequest(e.Message);
             }

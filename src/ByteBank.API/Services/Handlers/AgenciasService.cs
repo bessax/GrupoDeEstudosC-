@@ -106,11 +106,8 @@ namespace ByteBank.API.Services.Handlers
 
         private async Task ValidaRequest(AgenciaRequest agenciaRequest)
         {
-            var validation = await this.validator.ValidateAsync(agenciaRequest);
-            if (!validation.IsValid)
-            {
-                throw new ArgumentException(validation.ToString());
-            }
+            await this.validator.ValidateAndThrowAsync(agenciaRequest);
+
         }
     }
 }
