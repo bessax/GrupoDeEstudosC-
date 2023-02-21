@@ -1,10 +1,10 @@
 using ByteBank.API.Models;
-
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ByteBank.API.Data
 {
-    public class ByteBankContext : DbContext
+    public class ByteBankContext : IdentityDbContext
     {
         public ByteBankContext(DbContextOptions<ByteBankContext> options)
             : base(options)
@@ -23,6 +23,8 @@ namespace ByteBank.API.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //adicionado para criação da migração.
+            base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ByteBankContext).Assembly);
         }
     }

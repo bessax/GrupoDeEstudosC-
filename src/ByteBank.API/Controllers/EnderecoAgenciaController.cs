@@ -2,6 +2,8 @@
 using ByteBank.API.Services.Interfaces;
 using ByteBank.API.ViewModels;
 using FluentValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -9,6 +11,7 @@ namespace ByteBank.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 public class EnderecoAgenciaController : ControllerBase
 {
     private readonly IEnderecoAgenciasService service;
