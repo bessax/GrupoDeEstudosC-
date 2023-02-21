@@ -11,5 +11,7 @@ namespace ByteBank.API.Repository.Interface
         Task CriarAsync(T obj);
 
         Task DeletaAsync(T obj);
+
+        Task<IEnumerable<T>> BuscaTodosPaginadoAsync(int page, int pageSize);
     }
 }

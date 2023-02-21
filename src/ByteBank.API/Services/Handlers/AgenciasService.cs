@@ -109,5 +109,11 @@ namespace ByteBank.API.Services.Handlers
             await this.validator.ValidateAndThrowAsync(agenciaRequest);
 
         }
+
+        public async Task<IEnumerable<AgenciaViewModel>> AgenciaPaginadoAsync(int pagina, int tamanhoPagina)
+        {
+            var agencias = await this.repository.BuscaTodosPaginadoAsync(pagina, tamanhoPagina);
+            return mapper.Map<IEnumerable<AgenciaViewModel>>(agencias);
+        }
     }
 }

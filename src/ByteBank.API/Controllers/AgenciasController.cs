@@ -84,5 +84,16 @@ namespace ByteBank.API.Controllers
         {
             return await this.service.DeletaAgenciaAsync(id) ? this.NoContent() : this.NotFound();
         }
+
+        [HttpGet("paginado")]
+        public async Task<ActionResult<AgenciaViewModel>> GetAgenciasPaginadasAsync(int pagina = 1, int tamanhoPagina = 10)
+        {
+            var agencias = await service.AgenciaPaginadoAsync(pagina, tamanhoPagina);
+            if (agencias == null)
+            {
+                return this.Problem("Não existe dados a serem retornados.");
+            }
+            return this.Ok(agencias);
+        }
     }
 }

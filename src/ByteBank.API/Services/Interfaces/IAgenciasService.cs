@@ -18,5 +18,6 @@ namespace ByteBank.API.Services.Interfaces
         Task<AgenciaViewModel> CriaAgenciaAsync(AgenciaRequest agenciaRequest);
 
         Task<bool> DeletaAgenciaAsync(int id);
+        Task<IEnumerable<AgenciaViewModel>> AgenciaPaginadoAsync(int pagina, int tamanhoPagina);
     }
 }

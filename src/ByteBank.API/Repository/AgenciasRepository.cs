@@ -42,5 +42,14 @@ namespace ByteBank.API.Repository
             this.context.Agencias.Remove(agencia);
             await this.context.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<Agencia>> BuscaTodosPaginadoAsync(int page, int pageSize)
+        {
+            return await this.context.Agencias
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .AsNoTracking()
+            .ToListAsync();
+        }
     }
 }
