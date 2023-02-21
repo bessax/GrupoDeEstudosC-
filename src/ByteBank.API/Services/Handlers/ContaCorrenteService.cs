@@ -61,6 +61,7 @@ namespace ByteBank.API.Services.Handlers
 
             Conta conta = this.mapper.Map<Conta>(contaRequest);
             conta.CriadoEm = DateTime.Now;
+            conta.AtualizadoEm = DateTime.Now;
 
             cliente.Contas.Add(conta);
 

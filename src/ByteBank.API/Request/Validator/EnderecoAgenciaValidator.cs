@@ -25,7 +25,7 @@ namespace ByteBank.API.Request.Validator
                 .MinimumLength(10).WithMessage("Mínimo de 10 caracteres")
                 .MaximumLength(60).WithMessage("Máximo de 60 caracteres");
 
-            RuleFor(a => a.Complemento)
+            RuleFor(a => a.Numero)
                .NotNull()
                .WithMessage("O campo número é obrigatório");
         }
