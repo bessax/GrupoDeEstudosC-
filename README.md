@@ -26,6 +26,21 @@ A configuração do banco de dados é feita através do arquivo appsettings.json
 }
 ```
 
+### 🐱‍👤 Configuração Token JWT
+
+A configuração adicionais para implementação da segurança da API através de Token JWT é feita através do arquivo appsettings.json, que fica na raiz do projeto.
+
+```appsettings
+"JWTKey": {
+    "key": "Chave complexa criada manualmente"
+  },
+  "JWTTokenConfiguration": {
+    "Audience": "xxxxxxx",
+    "Issuer": "xxxxx",
+    "ExpireHours": 6
+  }
+```
+
 ## 🚀 Como executar o projeto
 
 ```bash
@@ -49,9 +64,11 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [.NET](https://docs.microsoft.com/pt-br/dotnet/) - Framework
 - [Entity Framework Core](https://docs.microsoft.com/pt-br/ef/core/) - ORM
 - [Swagger](https://swagger.io/) - Documentação da API
+- [Identity ASP.NET Core](https://learn.microsoft.com/pt-br/aspnet/core/security/authentication/identity?view=aspnetcore-7.0&tabs=visual-studio) - Documentação Identity no ASP.NET Core
 
 <!-- Author -->
 
-## ✒️ Autor
+## ✒️ Autor(es)
 
 - **André Bessa** - _Desenvolvedor_ - [bessax](https://github.com/bessax)
+
