@@ -18,5 +18,6 @@ namespace ByteBank.API.Services.Interfaces
         Task<EnderecoAgenciaViewModel> CriaEnderecoAgenciaAsync(EnderecoAgenciaRequest objRequest);
 
         Task<bool> DeletaEnderecoAgenciaAsync(int id);
+        Task<IEnumerable<EnderecoAgenciaViewModel>> EnderecoAgenciaPaginadoAsync(int pagina, int tamanhoPagina);
     }
 }

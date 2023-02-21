@@ -97,6 +97,12 @@ namespace ByteBank.API.Services.Handlers
             return (enderecos?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
-     
+        public async Task<IEnumerable<EnderecoAgenciaViewModel>> EnderecoAgenciaPaginadoAsync(int pagina, int tamanhoPagina)
+        {
+            var enderecos = await this.repository.BuscaTodosPaginadoAsync(pagina, tamanhoPagina);
+            return _mapper.Map<IEnumerable<EnderecoAgenciaViewModel>>(enderecos);
+        }
+
+
     }
 }

@@ -66,4 +66,15 @@ public class EnderecoAgenciaController : ControllerBase
         }
         return this.Ok(enderecoAgencia);
     }
+
+    [HttpGet("paginado")]
+    public async Task<ActionResult<EnderecoAgenciaViewModel>> GetEnderecoAgenciaPaginadosAsync(int pagina = 1, int tamanhoPagina = 10)
+    {
+        var enderecosAgencia = await service.EnderecoAgenciaPaginadoAsync(pagina,tamanhoPagina);
+        if (enderecosAgencia == null)
+        {
+            return this.Problem("Não existe dados a serem retornados.");
+        }
+        return this.Ok(enderecosAgencia);
+    }
 }

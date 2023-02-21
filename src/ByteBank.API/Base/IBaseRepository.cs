@@ -2,6 +2,8 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
+using ByteBank.API.Models;
+
 namespace ByteBank.API.Base
 {
     public interface IBaseRepository<T>
@@ -16,5 +18,7 @@ namespace ByteBank.API.Base
         Task CriarAsync(T obj);
 
         Task DeletaAsync(int id);
+
+        Task<IEnumerable<T>> BuscaTodosPaginadoAsync(int page, int pageSize);
     }
 }

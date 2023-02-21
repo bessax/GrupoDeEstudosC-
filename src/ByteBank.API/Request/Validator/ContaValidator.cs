@@ -1,5 +1,4 @@
-﻿using ByteBank.API.Models;
-using FluentValidation;
+﻿using FluentValidation;
 
 namespace ByteBank.API.Request.Validator;
 public class ContaValidator : AbstractValidator<ContaRequest>
