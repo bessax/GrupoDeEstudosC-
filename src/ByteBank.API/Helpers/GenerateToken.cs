@@ -7,7 +7,7 @@ using System.Text;
 
 namespace ByteBank.API.Helpers
 {
-    public class GenerateToken
+    internal class GenerateToken
     {
         private readonly IConfiguration configuration;
         public GenerateToken(IConfiguration configuration)
