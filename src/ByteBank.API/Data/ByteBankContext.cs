@@ -23,7 +23,7 @@ namespace ByteBank.API.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //adicionado para criação da migração.
+            //adicionado para criação da migração com Identity.
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ByteBankContext).Assembly);
         }

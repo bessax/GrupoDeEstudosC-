@@ -38,7 +38,7 @@ namespace ByteBank.API.Controllers
         }
 
         // GET: api/Clientes/5
-        [HttpGet("{id}")]
+        [HttpGet("{id:int:min(1)}")]
         public async Task<ActionResult<Cliente>> GetCliente(int id)
         {
             if (this.context.Clientes == null)
@@ -61,7 +61,7 @@ namespace ByteBank.API.Controllers
 
         // PUT: api/Clientes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPut("{id:int:min(1)}")]
         public async Task<IActionResult> PutCliente(int id, Cliente cliente)
         {
             if (id != cliente.Id)
@@ -106,7 +106,7 @@ namespace ByteBank.API.Controllers
         }
 
         // DELETE: api/Clientes/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int:min(1)}")]
         public async Task<IActionResult> DeleteCliente(int id)
         {
             if (this.context.Clientes == null)

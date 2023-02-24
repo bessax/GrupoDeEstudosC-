@@ -12,10 +12,6 @@ using ByteBank.API.Request.Validator;
 using ByteBank.API.Services.Handlers;
 using ByteBank.API.Services.Interfaces;
 using FluentValidation;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Runtime.CompilerServices;
 
 namespace ByteBank.API.Extensions;
 
