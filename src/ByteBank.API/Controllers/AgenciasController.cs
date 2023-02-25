@@ -32,7 +32,7 @@ namespace ByteBank.API.Controllers
         }
 
         // GET: api/Agencias/5
-        [HttpGet("{id:int:min(1)}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<AgenciaViewModel>> GetAgencia(int id)
         {
             var agencia = await this.service.BuscaAgenciaPorIdAsync(id);
@@ -47,7 +47,7 @@ namespace ByteBank.API.Controllers
 
         // PUT: api/Agencias/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id:int:min(1)}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> PutAgencia(int id, AgenciaRequest agencia)
         {
             try
@@ -79,7 +79,7 @@ namespace ByteBank.API.Controllers
         }
 
         // DELETE: api/Agencias/5
-        [HttpDelete("{id:int:min(1)}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAgencia(int id)
         {
             return await this.service.DeletaAgenciaAsync(id) ? this.NoContent() : this.NotFound();
