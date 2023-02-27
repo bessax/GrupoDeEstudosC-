@@ -25,7 +25,7 @@ namespace ByteBank.API.Controllers
         }
 
         // GET: api/ContaCorrente/5
-        [HttpGet("{id:int:min(1)}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<ContaCorrenteViewModel>> BuscaContaCorrentePorIdAsync(int id)
         {
             var conta = await this.service.BuscaContaCorrentePorIdAsync(id);
@@ -60,7 +60,7 @@ namespace ByteBank.API.Controllers
         }
 
         //POST: api/ContaCorrente/clienteId/1
-        [HttpPost("clienteId/{id:int:min(1)}")]
+        [HttpPost("clienteId/{id}")]
         public async Task<ActionResult<ContaCorrenteViewModel>> PostContaCorrente(int id, ContaRequest contaRequest)
         {
             ContaCorrenteViewModel? contaCorrenteView = await this.service.CriaContaAsync(id, contaRequest);
