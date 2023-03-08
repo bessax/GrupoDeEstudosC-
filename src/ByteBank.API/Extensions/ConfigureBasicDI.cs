@@ -28,12 +28,12 @@ public static class ConfigureBasicDI
 
     internal static void ConfigureAppServices(IServiceCollection services)
     {
-       
+
 
         services.AddAutoMapper(typeof(Program));
         services.AddScoped<ByteBankContext>();
         services.AddScoped<IValidator<EnderecoAgenciaRequest>, EnderecoAgenciaValidator>();
-        services.AddScoped<IRepository<Agencia>, AgenciasRepository>();
+        services.AddScoped<IAgenciaRepository, AgenciasRepository>();
         services.AddScoped<IContaCorrenteRepository, ContaCorrenteRepository>();
         services.AddScoped<IAgenciasService, AgenciasService>();
         services.AddScoped<IContaCorrenteService, ContaCorrenteService>();
