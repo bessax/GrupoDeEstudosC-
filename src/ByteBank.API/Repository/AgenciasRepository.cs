@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ByteBank.API.Repository
 {
-    public class AgenciasRepository : IRepository<Agencia>
+    public class AgenciasRepository : IAgenciaRepository
     {
         private readonly ByteBankContext context;
 
