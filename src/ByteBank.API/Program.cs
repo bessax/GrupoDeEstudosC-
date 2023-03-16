@@ -20,7 +20,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<ByteBankContext>()
     .AddDefaultTokenProviders();
 
-//Validando o token em cada requisição.
+//Validando o token em cada requisiï¿½ï¿½o.
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
     opt => opt.TokenValidationParameters = new TokenValidationParameters
     {
@@ -40,7 +40,7 @@ builder.Services.AddControllers(options =>
     options.SuppressAsyncSuffixInActionNames = false;
 });
 
-//Configuração do Swagger para habilitar JWT Bearer
+//Configuraï¿½ï¿½o do Swagger para habilitar JWT Bearer
 builder.Services.ConfigureSwaggerBearer();
 
 var app = builder.Build();
