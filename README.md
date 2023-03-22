@@ -79,4 +79,5 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - **Bruno Aragão** - _Desenvolvedor_  - [brunoaragao](https://github.com/brunoaragao)
 - **Walter Alípio** - _Desenvolvedor_ - [Walter-Alipio](https://github.com/Walter-Alipio)
 - **Enzo Gabriel** - _Desenvolvedor_  - [citendo](https://github.com/citendo)
+- **Leonardo de Lima Oliveira** - _Desenvolvedor_  - [kale19991](https://github.com/kale19991)
 
