@@ -3,8 +3,7 @@ using ByteBank.API.Models;
 using ByteBank.API.Request;
 using ByteBank.API.Services.Interfaces;
 using ByteBank.API.ViewModels;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,7 +11,6 @@ namespace ByteBank.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ClientesController : ControllerBase
     {
         private readonly ByteBankContext context;
@@ -40,7 +38,7 @@ namespace ByteBank.API.Controllers
         }
 
         // GET: api/Clientes/5
-        [HttpGet("{id:int:min(1)}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<Cliente>> GetCliente(int id)
         {
             if (this.context.Clientes == null)
@@ -63,33 +61,22 @@ namespace ByteBank.API.Controllers
 
         // PUT: api/Clientes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id:int:min(1)}")]
-        public async Task<IActionResult> PutCliente(int id, Cliente cliente)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutCliente(int id, ClienteRequest cliente)
         {
-            if (id != cliente.Id)
-            {
-                return this.BadRequest();
-            }
-
-            this.context.Clientes.Update(cliente);
-
+            bool result;
             try
             {
-                await this.context.SaveChangesAsync();
+                result = await this.service.AlteraClienteAsync(id, cliente);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (ValidationException e)
             {
-                if (!this.ClienteExists(id))
-                {
-                    return this.NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return BadRequest(e.Message);
             }
 
-            return this.NoContent();
+            if (!result) return NotFound();
+
+            return NoContent();
         }
 
         // POST: api/Clientes
@@ -102,13 +89,21 @@ namespace ByteBank.API.Controllers
                 return this.Problem("Entity set 'ByteBankContext.Clientes'  is null.");
             }
 
-            ClienteViewModel clienteView = await this.service.CriarClienteAsync(cliente);
+            ClienteViewModel clienteView;
+            try
+            {
+                clienteView = await this.service.CriarClienteAsync(cliente);
+            }
+            catch (ValidationException e)
+            {
+                return BadRequest(e.Message);
+            }
 
             return this.CreatedAtAction("GetCliente", new { id = clienteView.Id }, cliente);
         }
 
         // DELETE: api/Clientes/5
-        [HttpDelete("{id:int:min(1)}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCliente(int id)
         {
             if (this.context.Clientes == null)

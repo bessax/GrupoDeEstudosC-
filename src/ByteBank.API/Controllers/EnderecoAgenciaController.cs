@@ -59,7 +59,7 @@ public class EnderecoAgenciaController : ControllerBase
         return this.Ok(enderecoAgenciaCriada);
     }
 
-    [HttpGet("{id:int:min(1)}")]
+    [HttpGet("{id}")]
     public async Task<ActionResult<EnderecoAgenciaViewModel>> GetEnderecoAgenciaPorId(int id)
     {
         var enderecoAgencia = await service.BuscaEnderecoAgenciaPorIdAsync(id);

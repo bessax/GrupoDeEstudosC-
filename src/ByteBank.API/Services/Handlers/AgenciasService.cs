@@ -16,7 +16,7 @@ namespace ByteBank.API.Services.Handlers
         private readonly IMapper mapper;
         private readonly IValidator<AgenciaRequest> validator;
 
-        public AgenciasService(IRepository<Agencia> repository, IMapper _mapper, IValidator<AgenciaRequest> validator)
+        public AgenciasService(IAgenciaRepository repository, IMapper _mapper, IValidator<AgenciaRequest> validator)
         {
             this.repository = repository;
             this.mapper = _mapper;
