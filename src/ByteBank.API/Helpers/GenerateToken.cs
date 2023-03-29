@@ -1,5 +1,4 @@
 ﻿using ByteBank.API.Request.DTO;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -58,7 +57,7 @@ namespace ByteBank.API.Helpers
             {
                 Authenticated = true,
                 Token = new JwtSecurityTokenHandler().WriteToken(token),
-                Expiration = expiracaoEmHoras,
+                Expiration = expiracaoEmHoras,                
                 Message = "Token JWT gerado com sucesso!"
             };
         }

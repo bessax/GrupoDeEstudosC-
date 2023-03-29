@@ -3,7 +3,8 @@ using ByteBank.API.Models;
 using ByteBank.API.Request;
 using ByteBank.API.Services.Interfaces;
 using ByteBank.API.ViewModels;
-
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,7 @@ namespace ByteBank.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ClientesController : ControllerBase
     {
         private readonly ByteBankContext context;

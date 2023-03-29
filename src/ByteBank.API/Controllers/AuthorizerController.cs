@@ -1,13 +1,8 @@
 ﻿using ByteBank.API.Helpers;
-using ByteBank.API.Models;
-using ByteBank.API.Request;
 using ByteBank.API.Request.DTO;
-using ByteBank.API.Request.Validator;
 using FluentValidation;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
 
 namespace ByteBank.API.Controllers
 {
@@ -35,7 +30,7 @@ namespace ByteBank.API.Controllers
         }
 
         [HttpPost("Registrar")]
-        public async Task<ActionResult> RegistrarUsuario(UserDTO user)
+        public async Task<IActionResult> RegistrarUsuario(UserDTO user)
         {
             var validation = await validator.ValidateAsync(user);
 
@@ -62,7 +57,7 @@ namespace ByteBank.API.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<ActionResult> LoginUsuario(UserDTO user)
+        public async Task<IActionResult> LoginUsuario(UserDTO user)
         {
             var validation = await validator.ValidateAsync(user);
 
