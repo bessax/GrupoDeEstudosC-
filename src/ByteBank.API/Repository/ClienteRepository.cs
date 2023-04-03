@@ -22,4 +22,9 @@ public class ClienteRepository : BaseRepository<Cliente>, IClienteRepository
                 .Include(c => c.Endereco)
                 .SingleOrDefaultAsync(c => c.Id == id);
     }
+
+    public async Task<Cliente> BuscaPorCPFAsync(string cpf)
+    {
+        return await this.context.Clientes.Where(c => c.Cpf == cpf).SingleAsync();
+    }
 }

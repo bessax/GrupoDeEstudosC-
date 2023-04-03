@@ -26,6 +26,10 @@ public class ClienteService : IClienteService
     {
         await this.validator.ValidateAndThrowAsync(clienteRequest);
 
+        var consultaCpf = this.clienteRepository.BuscaPorCPFAsync(clienteRequest.Cpf);
+        if (consultaCpf is not null)
+            throw new ArgumentException($"CPF: {clienteRequest.Cpf} já cadastrado no sistema.");
+
         Cliente cliente = this.mapper.Map<Cliente>(clienteRequest);
 
         foreach (var conta in cliente.Contas)
@@ -63,6 +67,14 @@ public class ClienteService : IClienteService
         return true;
     }
 
+    public async Task<ClienteViewModel?> BuscaClientePorIdAsync(int id)
+    {
+        var cliente = await this.clienteRepository.BuscaPorIdAsync(id);
+
+        if (cliente is null) return null;
+
+        return this.mapper.Map<ClienteViewModel>(cliente);
+    }
     private async Task<bool> ClienteExists(int id)
     {
         var clientes = await this.clienteRepository.BuscaTodosAsync();
