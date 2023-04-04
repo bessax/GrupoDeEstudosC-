@@ -3,6 +3,10 @@ using ByteBank.API.Services.Interfaces;
 using ByteBank.API.ViewModels;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+
+using FluentValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ByteBank.API.Controllers
@@ -65,7 +69,16 @@ namespace ByteBank.API.Controllers
         [HttpPost("clienteId/{id}")]
         public async Task<ActionResult<ContaCorrenteViewModel>> PostContaCorrente(int id, ContaRequest contaRequest)
         {
-            ContaCorrenteViewModel? contaCorrenteView = await this.service.CriaContaAsync(id, contaRequest);
+            ContaCorrenteViewModel? contaCorrenteView;
+            try
+            {
+                contaCorrenteView = await this.service.CriaContaAsync(id, contaRequest);
+            }
+            catch (ValidationException e)
+            {
+
+                return BadRequest(e.Message);
+            }
 
             if (contaCorrenteView is null) return this.NotFound($"Cliente id: {id} não encontrado.");
 

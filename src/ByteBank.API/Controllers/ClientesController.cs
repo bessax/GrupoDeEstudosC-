@@ -3,6 +3,8 @@ using ByteBank.API.Models;
 using ByteBank.API.Request;
 using ByteBank.API.Services.Interfaces;
 using ByteBank.API.ViewModels;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +13,7 @@ namespace ByteBank.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ClientesController : ControllerBase
     {
         private readonly ByteBankContext context;
@@ -39,24 +42,15 @@ namespace ByteBank.API.Controllers
 
         // GET: api/Clientes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Cliente>> GetCliente(int id)
+        public async Task<ActionResult<ClienteViewModel>> GetCliente(int id)
         {
-            if (this.context.Clientes == null)
+            var clienteView = await this.service.BuscaClientePorIdAsync(id);
+            if (clienteView is null)
             {
                 return this.NotFound();
             }
 
-            var cliente = await this.context.Clientes
-                .Include(c => c.Contas)
-                .Include(c => c.Endereco)
-                .SingleOrDefaultAsync(c => c.Id == id);
-
-            if (cliente == null)
-            {
-                return this.NotFound();
-            }
-
-            return cliente;
+            return clienteView;
         }
 
         // PUT: api/Clientes/5
@@ -84,17 +78,16 @@ namespace ByteBank.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Cliente>> PostCliente(ClienteRequest cliente)
         {
-            if (this.context.Clientes == null)
-            {
-                return this.Problem("Entity set 'ByteBankContext.Clientes'  is null.");
-            }
-
             ClienteViewModel clienteView;
             try
             {
                 clienteView = await this.service.CriarClienteAsync(cliente);
             }
             catch (ValidationException e)
+            {
+                return BadRequest(e.Message);
+            }
+            catch (ArgumentException e)
             {
                 return BadRequest(e.Message);
             }

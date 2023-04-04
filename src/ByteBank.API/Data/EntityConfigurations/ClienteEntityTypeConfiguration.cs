@@ -1,3 +1,4 @@
+using ByteBank.API.Enums;
 using ByteBank.API.Models;
 
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +30,14 @@ namespace ByteBank.API.Data.EntityConfigurations
 
             builder
                 .HasIndex(c => c.Cpf);
+
+            builder
+                .HasDiscriminator<TipoCliente>("TipoCliente");
+
+            builder
+                .HasDiscriminator<TipoCliente>("TipoCliente")
+                .HasValue<Cliente>(TipoCliente.PessoaFisica)
+                .HasValue<ClienteCnpj>(TipoCliente.Cnpj);
         }
     }
 }

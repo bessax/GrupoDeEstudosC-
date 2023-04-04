@@ -6,4 +6,5 @@ public interface IClienteService
 {
     Task<ClienteViewModel> CriarClienteAsync(ClienteRequest clienteRequest);
     Task<bool> AlteraClienteAsync(int id, ClienteRequest clienteRequest);
+    Task<ClienteViewModel?> BuscaClientePorIdAsync(int id);
 }

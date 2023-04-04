@@ -19,7 +19,7 @@ public class ClienteValidator : AbstractValidator<ClienteRequest>
         RuleFor(c => c.Tipo)
             .Cascade(CascadeMode.Stop)
             .NotNull().WithMessage("Tipo cliente é obrigatório")
-            .IsInEnum().WithMessage("Expecifique 0 - PessoaFísica, 1 - Cnpj");
+            .IsInEnum().WithMessage("Expecifique - PessoaFísica, Cnpj");
 
         RuleForEach(c => c.Contas)
             .SetValidator(new ContaValidator());
