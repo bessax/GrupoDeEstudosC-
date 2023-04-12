@@ -18,7 +18,16 @@ namespace ByteBank.API.ViewModels.Automapper.Profiles
                 Cep = r.Endereco.Cep
             }));
 
+            CreateMap<Agencia, AgenciaRequest>().ForMember(a => a.Endereco, r => r.MapFrom(r => new EnderecoRequest()
+            {
+                Logradouro = r.Endereco.Logradouro,
+                Numero = r.Endereco.Numero,
+                Complemento = r.Endereco.Complemento,
+                Cep = r.Endereco.Cep
+            }));
+
             CreateMap<Agencia, AgenciaViewModel>();
+           
         }
     }
 }

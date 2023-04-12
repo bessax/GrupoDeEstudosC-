@@ -5,28 +5,17 @@ using ByteBank.API.Request.Validator;
 using ByteBank.API.Services.Handlers;
 using ByteBank.API.ViewModels;
 using FizzWare.NBuilder;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace ByteBank.API.Test.Services
 {
-    public class AgenciasServiceTest
+    public class AgenciaServiceTest
     {
-        [SetUp]
-        public void Setup()
+        [Fact]
+        public async Task BuscaAgenciasAsyncTest()
         {
-        }
-
-        [Test]
-        public async Task BuscaAgenciasAsyncTeste()
-        {
-            //Arrenge
+            //Arrange
             var repositoryMock = new Mock<IAgenciaRepository>();
             var mapperMock = new Mock<IMapper>();
             var validation = new AgenciaValidator();
@@ -45,8 +34,10 @@ namespace ByteBank.API.Test.Services
 
             //Act
             var result = await service.BuscaAgenciasAsync();
+
             //Assert
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
+
     }
 }

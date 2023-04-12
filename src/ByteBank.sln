@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ByteBank.API", "ByteBank.API\ByteBank.API.csproj", "{07CC1ACB-7F3F-4170-9611-A52704884E41}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ByteBank.API.Test", "ByteBank.API.Test\ByteBank.API.Test.csproj", "{8C0F059E-04E6-40D2-9D48-F2E11B90BC24}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ByteBank.API.Test", "ByteBank.API.Test\ByteBank.API.Test.csproj", "{26D374C1-24C8-4D6F-9D97-F97D91B32EF2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{07CC1ACB-7F3F-4170-9611-A52704884E41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07CC1ACB-7F3F-4170-9611-A52704884E41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07CC1ACB-7F3F-4170-9611-A52704884E41}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8C0F059E-04E6-40D2-9D48-F2E11B90BC24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8C0F059E-04E6-40D2-9D48-F2E11B90BC24}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8C0F059E-04E6-40D2-9D48-F2E11B90BC24}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8C0F059E-04E6-40D2-9D48-F2E11B90BC24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26D374C1-24C8-4D6F-9D97-F97D91B32EF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26D374C1-24C8-4D6F-9D97-F97D91B32EF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26D374C1-24C8-4D6F-9D97-F97D91B32EF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26D374C1-24C8-4D6F-9D97-F97D91B32EF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
