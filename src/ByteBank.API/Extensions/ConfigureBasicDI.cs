@@ -47,5 +47,6 @@ public static class ConfigureBasicDI
         services.AddScoped<IValidator<AgenciaRequest>, AgenciaValidator>();
         services.AddScoped<IValidator<UserDTO>, UsuarioDTOValidator>();
         services.AddScoped<IValidator<ClienteRequest>, ClienteValidator>();
+        services.AddScoped<IValidator<ContaRequest>, ContaValidator>();
     }
 }

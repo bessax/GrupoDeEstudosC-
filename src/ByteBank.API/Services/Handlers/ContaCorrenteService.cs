@@ -8,6 +8,7 @@ using ByteBank.API.Repository.Interface;
 using ByteBank.API.Request;
 using ByteBank.API.Services.Interfaces;
 using ByteBank.API.ViewModels;
+using FluentValidation;
 
 namespace ByteBank.API.Services.Handlers
 {
@@ -16,12 +17,14 @@ namespace ByteBank.API.Services.Handlers
         private readonly IMapper mapper;
         private readonly IContaCorrenteRepository repository;
         private readonly IClienteRepository clienteRepository;
+        private readonly IValidator<ContaRequest> validator;
 
-        public ContaCorrenteService(IMapper mapper, IContaCorrenteRepository repository, IClienteRepository clienteRepository)
+        public ContaCorrenteService(IMapper mapper, IContaCorrenteRepository repository, IClienteRepository clienteRepository, IValidator<ContaRequest> validator)
         {
             this.mapper = mapper;
             this.repository = repository;
             this.clienteRepository = clienteRepository;
+            this.validator = validator;
         }
 
         public async Task<ContaCorrenteViewModel?> BuscaContaCorrentePorIdAsync(int id)
@@ -56,6 +59,8 @@ namespace ByteBank.API.Services.Handlers
 
         public async Task<ContaCorrenteViewModel?> CriaContaAsync(int id, ContaRequest contaRequest)
         {
+            await this.validator.ValidateAndThrowAsync(contaRequest);
+
             var cliente = await this.clienteRepository.BuscaPorIdAsync(id);
             if (cliente is null) return null;
 
