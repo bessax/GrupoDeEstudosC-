@@ -42,6 +42,23 @@ namespace ByteBank.API.Controllers
                 .ToListAsync();
         }
 
+        [HttpGet("paginado")]
+        public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes(int pagina = 1, int tamanhoPagina = 10)
+        {
+            if (this.context.Clientes == null)
+            {
+                return this.NotFound();
+            }
+
+            return await this.context.Clientes
+                .Include(c => c.Contas)
+                .Include(c => c.Endereco)
+                .Skip((pagina - 1) * tamanhoPagina)
+                .Take(tamanhoPagina)
+                .AsNoTracking()
+                .ToListAsync(); ;
+        }
+
         // GET: api/Clientes/5
         [HttpGet("{id}")]
         public async Task<ActionResult<ClienteViewModel>> GetCliente(int id)
