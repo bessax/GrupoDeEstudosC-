@@ -8,4 +8,6 @@ public class AgenciaRequest
     required public string NomeAgencia { get; set; }
 
     required public EnderecoRequest Endereco { get; set; }
+    public DateTime CriadoEm { get; internal set; }
+    public DateTime AtualizadoEm { get; internal set; }
 }
