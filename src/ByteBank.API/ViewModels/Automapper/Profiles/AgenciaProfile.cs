@@ -15,7 +15,9 @@ namespace ByteBank.API.ViewModels.Automapper.Profiles
                 Logradouro = r.Endereco.Logradouro,
                 Numero = r.Endereco.Numero,
                 Complemento = r.Endereco.Complemento,
-                Cep = r.Endereco.Cep
+                Cep = r.Endereco.Cep,
+                CriadoEm = r.CriadoEm,
+                AtualizadoEm = r.AtualizadoEm
             }));
 
             CreateMap<Agencia, AgenciaRequest>().ForMember(a => a.Endereco, r => r.MapFrom(r => new EnderecoRequest()
@@ -23,11 +25,13 @@ namespace ByteBank.API.ViewModels.Automapper.Profiles
                 Logradouro = r.Endereco.Logradouro,
                 Numero = r.Endereco.Numero,
                 Complemento = r.Endereco.Complemento,
-                Cep = r.Endereco.Cep
+                Cep = r.Endereco.Cep,
+                CriadoEm = r.CriadoEm,
+                AtualizadoEm = r.AtualizadoEm
             }));
 
             CreateMap<Agencia, AgenciaViewModel>();
-           
+
         }
     }
 }

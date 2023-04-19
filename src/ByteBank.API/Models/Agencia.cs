@@ -10,5 +10,10 @@ namespace ByteBank.API.Models
         required public int NumeroAgencia { get; set; }
         required public string NomeAgencia { get; set; }
         required public EnderecoAgencia Endereco { get; set; }
+        required public DateTime CriadoEm { get; set; }
+
+        required public DateTime AtualizadoEm { get; set; }
+
+        public DateTime? ExcluidoEm { get; set; }
     }
 }

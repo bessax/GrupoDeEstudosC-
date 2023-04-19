@@ -19,10 +19,14 @@ namespace ByteBank.API.Test.Builder
                     Numero = rd.Next(1, 9999),
                     Cep = "00000-000",
                     Logradouro = Guid.NewGuid().ToString().Substring(0, 20),
-                }
+                    CriadoEm = DateTime.Now,
+                    AtualizadoEm = DateTime.Now
+                },
+                CriadoEm = DateTime.Now,
+                AtualizadoEm = DateTime.Now
             };
         }
 
-    
+
     }
 }

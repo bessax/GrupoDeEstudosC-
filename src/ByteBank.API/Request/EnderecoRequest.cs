@@ -11,5 +11,7 @@ public class EnderecoRequest
     required public int Numero { get; set; }
 
     required public string Cep { get; set; }
+    public DateTime CriadoEm { get; internal set; }
+    public DateTime AtualizadoEm { get; internal set; }
 
 }
