@@ -9,7 +9,7 @@ namespace ByteBank.API.Services.Interfaces
 {
     public interface IAgenciasService
     {
-        Task<bool> AlteraAgenciaAsync(AgenciaRequest agenciaRequest);
+        Task<bool> AlteraAgenciaAsync(int id, AgenciaRequest agenciaRequest);
 
         Task<AgenciaViewModel?> BuscaAgenciaPorIdAsync(int id);
 

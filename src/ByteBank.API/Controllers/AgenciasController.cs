@@ -55,7 +55,7 @@ namespace ByteBank.API.Controllers
         {
             try
             {
-                return await this.service.AlteraAgenciaAsync(agencia) ? this.NoContent() : this.NotFound();
+                return await this.service.AlteraAgenciaAsync(id, agencia) ? this.NoContent() : this.NotFound();
             }
             catch (ValidationException e)
             {
@@ -94,7 +94,7 @@ namespace ByteBank.API.Controllers
             var agencias = await service.AgenciaPaginadoAsync(pagina, tamanhoPagina);
             if (agencias == null)
             {
-                return this.Problem("Não existe dados a serem retornados.");
+                return this.Problem("Nï¿½o existe dados a serem retornados.");
             }
             return this.Ok(agencias);
         }
