@@ -27,12 +27,12 @@ public class BaseRepository<T> : IBaseRepository<T>
         return await this.context.Set<T>().FindAsync(id);
     }
 
-    public async Task<List<T>> BuscaTodosAsync()
+    public virtual async Task<List<T>> BuscaTodosAsync()
     {
         return await this.context.Set<T>().AsNoTracking().ToListAsync();
     }
 
-    public async Task<IEnumerable<T>> BuscaTodosPaginadoAsync(int page, int pageSize)
+    public virtual async Task<IEnumerable<T>> BuscaTodosPaginadoAsync(int page, int pageSize)
     {
 
         return await this.context.Set<T>()
@@ -40,9 +40,6 @@ public class BaseRepository<T> : IBaseRepository<T>
             .Take(pageSize)
             .AsNoTracking()
             .ToListAsync(); ;
- 
-
-        
     }
 
     public async Task CriarAsync(T obj)
@@ -63,4 +60,5 @@ public class BaseRepository<T> : IBaseRepository<T>
         this.context.Set<T>().Remove(entity);
         await this.context.SaveChangesAsync();
     }
+
 }
