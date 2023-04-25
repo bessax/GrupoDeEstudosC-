@@ -1,3 +1,4 @@
+using ByteBank.API.Base;
 using ByteBank.API.Data;
 using ByteBank.API.Enums;
 using ByteBank.API.Models;
@@ -6,16 +7,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ByteBank.API.Repository
 {
-    public class ContaCorrenteRepository : IContaCorrenteRepository
+    public class ContaCorrenteRepository : BaseRepository<Conta>, IContaCorrenteRepository
     {
         private readonly ByteBankContext context;
 
         public ContaCorrenteRepository(ByteBankContext context)
+            : base(context)
         {
             this.context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<Conta?> BuscaPorIdAsync(int id)
+        public override async Task<Conta?> BuscaPorIdAsync(int id)
         {
             var query =
                 from conta in this.context.Contas
@@ -27,7 +29,7 @@ namespace ByteBank.API.Repository
             return await query.SingleOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<Conta>> BuscaTodosAsync()
+        public override async Task<List<Conta>> BuscaTodosAsync()
         {
             var query =
                 from conta in this.context.Contas
@@ -38,7 +40,7 @@ namespace ByteBank.API.Repository
             return await query.ToListAsync();
         }
 
-        public async Task<IEnumerable<Conta>> BuscaTodosPaginadoAsync(int pagina, int tamanhoPagina)
+        public override async Task<IEnumerable<Conta>> BuscaTodosPaginadoAsync(int pagina, int tamanhoPagina)
         {
             var query =
                 from conta in this.context.Contas

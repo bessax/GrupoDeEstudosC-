@@ -12,7 +12,7 @@ namespace ByteBank.API.Services.Handlers
 {
     public class AgenciasService : IAgenciasService
     {
-        private readonly IRepository<Agencia> repository;
+        private readonly IAgenciaRepository repository;
         private readonly IMapper mapper;
         private readonly IValidator<AgenciaRequest> validator;
 
@@ -46,14 +46,15 @@ namespace ByteBank.API.Services.Handlers
             return this.mapper.Map<AgenciaViewModel>(agencia);
         }
 
-        public async Task<bool> AlteraAgenciaAsync(AgenciaRequest agenciaRequest)
+        public async Task<bool> AlteraAgenciaAsync(int id, AgenciaRequest agenciaRequest)
         {
             await ValidaRequest(agenciaRequest);
 
             var agencia = this.mapper.Map<Agencia>(agenciaRequest);
+            agencia.Id = id;
             try
             {
-                await this.repository.AlteraAsync(agencia);
+                await this.repository.AlteraAsync(id, agencia);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -94,7 +95,7 @@ namespace ByteBank.API.Services.Handlers
                 return false;
             }
 
-            await this.repository.DeletaAsync(agencia);
+            await this.repository.DeletaAsync(id);
             return true;
         }
 

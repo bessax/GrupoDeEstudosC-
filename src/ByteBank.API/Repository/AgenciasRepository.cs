@@ -1,3 +1,4 @@
+using ByteBank.API.Base;
 using ByteBank.API.Data;
 using ByteBank.API.Models;
 using ByteBank.API.Repository.Interface;
@@ -5,51 +6,26 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ByteBank.API.Repository
 {
-    public class AgenciasRepository : IAgenciaRepository
+    public class AgenciasRepository : BaseRepository<Agencia>, IAgenciaRepository
     {
         private readonly ByteBankContext context;
 
         public AgenciasRepository(ByteBankContext context)
+            : base(context)
         {
             this.context = context;
         }
 
-        public async Task<List<Agencia>> BuscaTodosAsync()
+        public override async Task<List<Agencia>> BuscaTodosAsync()
         {
             return await this.context.Agencias.Include(a => a.Endereco)
                 .ToListAsync();
         }
 
-        public async Task<Agencia> BuscaPorIdAsync(int id)
+        public override async Task<Agencia?> BuscaPorIdAsync(int id)
         {
             return await this.context.Agencias.Include(a => a.Endereco).FirstAsync(a => a.Id == id);
         }
 
-        public async Task AlteraAsync(Agencia agencia)
-        {
-            this.context.Agencias.Update(agencia);
-            await this.context.SaveChangesAsync();
-        }
-
-        public async Task CriarAsync(Agencia agencia)
-        {
-            this.context.Agencias.Add(agencia);
-            await this.context.SaveChangesAsync();
-        }
-
-        public async Task DeletaAsync(Agencia agencia)
-        {
-            this.context.Agencias.Remove(agencia);
-            await this.context.SaveChangesAsync();
-        }
-
-        public async Task<IEnumerable<Agencia>> BuscaTodosPaginadoAsync(int page, int pageSize)
-        {
-            return await this.context.Agencias
-            .Skip((page - 1) * pageSize)
-            .Take(pageSize)
-            .AsNoTracking()
-            .ToListAsync();
-        }
     }
 }
