@@ -15,10 +15,10 @@ namespace ByteBank.API.Models
         required public int Numero { get; set; }
 
         required public string Cep { get; set; }
-        required public DateTime CriadoEm { get; set; }
+        required public DateTime CriadoEm { get; set; } = DateTime.Now;
 
-        required public DateTime AtualizadoEm { get; set; }
+        required public DateTime AtualizadoEm { get; set; } = DateTime.Now;
 
-        public DateTime? ExcluidoEm { get; set; }
+        public DateTime? ExcluidoEm { get; set; } = null;
     }
 }
