@@ -26,7 +26,7 @@ public class ClienteService : IClienteService
     {
         await this.validator.ValidateAndThrowAsync(clienteRequest);
 
-        var consultaCpf = this.clienteRepository.BuscaPorCPFAsync(clienteRequest.Cpf);
+        var consultaCpf = await this.clienteRepository.BuscaPorCPFAsync(clienteRequest.Cpf);
         if (consultaCpf is not null)
             throw new ArgumentException($"CPF: {clienteRequest.Cpf} já cadastrado no sistema.");
 
