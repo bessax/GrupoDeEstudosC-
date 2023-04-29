@@ -176,6 +176,41 @@ namespace ByteBank.API.Test.Models
             Assert.Equal(exception, validation.Errors.FirstOrDefault()?.ToString());
         }
 
+        [Fact]
+        public void Test_TipoCliente_IsFail()
+        {
+            // Given
+            var request = new ClienteRequest
+            {
+                Nome = "João",
+                Cpf = "456.789.951-59",
+                Tipo = (TipoCliente)3,
+                Endereco = new EnderecoRequest
+                {
+                    Logradouro = "Rua Manoel",
+                    Numero = 888,
+                    Cep = "88899-000"
+                },
+                Contas = new ContaRequest[]
+                    {
+                        new ContaRequest
+                        {
+                            NumeroConta = "3219-4545-6554-9635",
+                            Saldo = 456879126.20,
+                            ChavePix = "joao@email.com",
+                            Tipo = 0,
+                            AgenciaId = 2
+                        }
+                    }
+            };
+            var exception = "Expecifique - PessoaFísica = 0, Cnpj = 1";
 
+            // When
+            var validation = _validator.Validate(request);
+            // Then
+            Assert.NotNull(validation);
+            Assert.False(validation.IsValid);
+            Assert.Equal(exception, validation.Errors.FirstOrDefault()?.ToString());
+        }
     }
 }
