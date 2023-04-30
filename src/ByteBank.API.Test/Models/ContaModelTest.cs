@@ -1,6 +1,9 @@
+using AutoMapper;
 using ByteBank.API.Enums;
+using ByteBank.API.Models;
 using ByteBank.API.Request;
 using ByteBank.API.Request.Validator;
+using ByteBank.API.ViewModels.Automapper.Profiles;
 using FluentValidation;
 
 namespace ByteBank.API.Test.Models
@@ -8,10 +11,38 @@ namespace ByteBank.API.Test.Models
     public class ContaModelTest
     {
         private readonly IValidator<ContaRequest> _validator;
+        private readonly IMapper _mapper;
         public ContaModelTest()
         {
             _validator = new ContaValidator();
+            var config = new MapperConfiguration(cfg =>
+         {
+             cfg.AddProfile<ContaProfile>();
+         });
+
+            _mapper = config.CreateMapper();
         }
+
+        [Fact]
+        public void TestMap_ContaRequest_para_Conta()
+        {
+            // Given
+            var request = new ContaRequest()
+            {
+                AgenciaId = 1,
+                ChavePix = "123.985.972-86",
+                NumeroConta = "4567-7894-3854-7298",
+                Saldo = 10,
+                Tipo = (TipoConta)0
+            };
+            // When
+            var conta = _mapper.Map<Conta>(request);
+            // Then
+            Assert.NotNull(conta);
+            Assert.Equivalent(request, conta);
+
+        }
+
         [Fact]
         public void TestContaValidator_IsSuccess()
         {
