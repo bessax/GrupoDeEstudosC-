@@ -3,6 +3,7 @@ using ByteBank.API.Enums;
 using ByteBank.API.Models;
 using ByteBank.API.Request;
 using ByteBank.API.Request.Validator;
+using ByteBank.API.ViewModels;
 using ByteBank.API.ViewModels.Automapper.Profiles;
 using FluentValidation;
 
@@ -41,6 +42,31 @@ namespace ByteBank.API.Test.Models
             Assert.NotNull(conta);
             Assert.Equivalent(request, conta);
 
+        }
+
+        [Fact]
+        public void TestMap_Conta_para_ContaCorrenteViewModel()
+        {
+            // Given
+            var conta = new Conta()
+            {
+                AgenciaId = 1,
+                ChavePix = "123.985.972-86",
+                NumeroConta = "4567-7894-3854-7298",
+                Saldo = 10,
+                Tipo = (TipoConta)0
+            };
+
+            // When
+            var contaViewModel = _mapper.Map<ContaCorrenteViewModel>(conta);
+
+            // Then
+            Assert.NotNull(contaViewModel);
+            Assert.Equal(conta.AgenciaId, contaViewModel.AgenciaId);
+            Assert.Equal(conta.ChavePix, contaViewModel.ChavePix);
+            Assert.Equal(conta.NumeroConta, contaViewModel.NumeroConta);
+            Assert.Equal(conta.Saldo, contaViewModel.Saldo);
+            Assert.Equal(conta.Tipo, contaViewModel.Tipo);
         }
 
         [Fact]

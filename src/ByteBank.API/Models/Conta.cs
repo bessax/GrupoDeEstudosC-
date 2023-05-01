@@ -22,11 +22,11 @@ namespace ByteBank.API.Models
 
         required public int AgenciaId { get; set; }
 
-        public DateTime CriadoEm { get; set; }
+        public DateTime CriadoEm { get; set; } = DateTime.UtcNow;
 
-        public DateTime AtualizadoEm { get; set; }
+        public DateTime AtualizadoEm { get; set; } = DateTime.UtcNow;
 
-        public DateTime? ExcluidoEm { get; set; }
+        public DateTime? ExcluidoEm { get; set; } = null;
 
         public void Sacar()
         {

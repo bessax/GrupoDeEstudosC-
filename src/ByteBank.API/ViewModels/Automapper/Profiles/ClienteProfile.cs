@@ -16,8 +16,10 @@ public class ClienteProfile : Profile
         .ForMember(dest => dest.ExcluidoEm, opt => opt.Ignore());
 
         CreateMap<EnderecoRequest, EnderecoCliente>()
-            .ForMember(dest => dest.Id, opt => opt.Ignore())
-            .ForMember(dest => dest.ExcluidoEm, opt => opt.Ignore());
+                   .ForMember(dest => dest.Id, opt => opt.Ignore())
+                   .ForMember(dest => dest.CriadoEm, opt => opt.Ignore())
+                   .ForMember(dest => dest.AtualizadoEm, opt => opt.Ignore())
+                   .ForMember(dest => dest.ExcluidoEm, opt => opt.Ignore());
 
         CreateMap<ClienteRequest, Cliente>()
             .ForMember(dest => dest.Id, opt => opt.Ignore())
