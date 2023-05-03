@@ -25,9 +25,7 @@ namespace ByteBank.API.ViewModels.Automapper.Profiles
                 Logradouro = r.Endereco.Logradouro,
                 Numero = r.Endereco.Numero,
                 Complemento = r.Endereco.Complemento,
-                Cep = r.Endereco.Cep,
-                CriadoEm = r.CriadoEm,
-                AtualizadoEm = r.AtualizadoEm
+                Cep = r.Endereco.Cep
             }));
 
             CreateMap<Agencia, AgenciaViewModel>();

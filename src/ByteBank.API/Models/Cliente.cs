@@ -1,7 +1,3 @@
-// <copyright file="Cliente.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
 using ByteBank.API.Enums;
 
 namespace ByteBank.API.Models
@@ -19,10 +15,12 @@ namespace ByteBank.API.Models
         required public ICollection<Conta> Contas { get; set; }
 
         required public EnderecoCliente Endereco { get; set; }
-        required public DateTime CriadoEm { get; set; }
 
-        required public DateTime AtualizadoEm { get; set; }
+        required public DateTime CriadoEm { get; set; } = DateTime.UtcNow;
 
-        public DateTime? ExcluidoEm { get; set; }
+        public DateTime AtualizadoEm { get; set; } = DateTime.UtcNow;
+
+        public DateTime? ExcluidoEm { get; set; } = null;
+
     }
 }

@@ -15,4 +15,7 @@ public class ClienteViewModel
     required public ICollection<Conta> Contas { get; set; }
 
     required public EnderecoCliente Endereco { get; set; }
+    public DateTime CriadoEm { get; set; }
+
+    public DateTime AtualizadoEm { get; set; }
 }
