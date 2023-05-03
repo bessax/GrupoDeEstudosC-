@@ -2,8 +2,9 @@ using AutoMapper;
 using ByteBank.API.Enums;
 using ByteBank.API.Models;
 using ByteBank.API.Request;
-using ByteBank.API.Request.Validator;
 using ByteBank.API.ViewModels;
+using ByteBank.API.Test.Builder;
+using ByteBank.API.Request.Validator;
 using ByteBank.API.ViewModels.Automapper.Profiles;
 using FluentValidation;
 
@@ -28,14 +29,7 @@ namespace ByteBank.API.Test.Models
         public void TestMap_ContaRequest_para_Conta()
         {
             // Given
-            var request = new ContaRequest()
-            {
-                AgenciaId = 1,
-                ChavePix = "123.985.972-86",
-                NumeroConta = "4567-7894-3854-7298",
-                Saldo = 10,
-                Tipo = (TipoConta)0
-            };
+            var request = new ContaModelBuilder().BuildContaRequest();
             // When
             var conta = _mapper.Map<Conta>(request);
             // Then
@@ -47,45 +41,44 @@ namespace ByteBank.API.Test.Models
         [Fact]
         public void TestMap_Conta_para_ContaCorrenteViewModel()
         {
+
             // Given
-            var conta = new Conta()
-            {
-                AgenciaId = 1,
-                ChavePix = "123.985.972-86",
-                NumeroConta = "4567-7894-3854-7298",
-                Saldo = 10,
-                Tipo = (TipoConta)0
-            };
+            var conta = new ContaModelBuilder().BuildConta();
 
             // When
             var contaViewModel = _mapper.Map<ContaCorrenteViewModel>(conta);
 
             // Then
             Assert.NotNull(contaViewModel);
-            Assert.Equal(conta.AgenciaId, contaViewModel.AgenciaId);
-            Assert.Equal(conta.ChavePix, contaViewModel.ChavePix);
-            Assert.Equal(conta.NumeroConta, contaViewModel.NumeroConta);
-            Assert.Equal(conta.Saldo, contaViewModel.Saldo);
             Assert.Equal(conta.Tipo, contaViewModel.Tipo);
+            Assert.Equal(conta.Saldo, contaViewModel.Saldo);
+            Assert.Equal(conta.ChavePix, contaViewModel.ChavePix);
+            Assert.Equal(conta.AgenciaId, contaViewModel.AgenciaId);
+            Assert.Equal(conta.NumeroConta, contaViewModel.NumeroConta);
         }
 
         [Fact]
         public void TestContaValidator_IsSuccess()
         {
             // Given
-            var conta = new ContaRequest()
-            {
-                AgenciaId = 1,
-                ChavePix = "123.985.972-86",
-                NumeroConta = "4567-7894-3854-7298",
-                Saldo = 10,
-                Tipo = (TipoConta)0
-            };
+            var conta1 = new ContaModelBuilder().BuildContaRequest();
+            var conta2 = new ContaModelBuilder().BuildContaRequest();
+            var conta3 = new ContaModelBuilder().BuildContaRequest();
+            var conta4 = new ContaModelBuilder().BuildContaRequest();
             // When
-            var validation = _validator.Validate(conta);
+            List<FluentValidation.Results.ValidationResult?> validations = new(){
+                _validator.Validate(conta1),
+                _validator.Validate(conta2),
+                _validator.Validate(conta3),
+                _validator.Validate(conta4)
+            };
             // Then
-            Assert.NotNull(validation);
-            Assert.True(validation.IsValid);
+
+            foreach (var validation in validations)
+            {
+                Assert.NotNull(validation);
+                Assert.True(validation.IsValid);
+            }
         }
 
         [Theory]
@@ -101,14 +94,9 @@ namespace ByteBank.API.Test.Models
         public void TestContaValidator_ChavePixFormat_IsSuccess(string chavePix)
         {
             // Given
-            var conta = new ContaRequest()
-            {
-                AgenciaId = 1,
-                ChavePix = chavePix,
-                NumeroConta = "4567-7894-3854-7298",
-                Saldo = 10,
-                Tipo = (TipoConta)0
-            };
+            var conta = new ContaModelBuilder().BuildContaRequest();
+            conta.ChavePix = chavePix;
+
             // When
             var validation = _validator.Validate(conta);
             // Then
@@ -141,4 +129,5 @@ namespace ByteBank.API.Test.Models
             Assert.Equal(expectedMessage, validation.Errors.FirstOrDefault()?.ToString());
         }
     }
+
 }

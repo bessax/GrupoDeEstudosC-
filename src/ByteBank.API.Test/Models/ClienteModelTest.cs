@@ -43,29 +43,7 @@ namespace ByteBank.API.Test.Models
         public void TestMap_ClienteRequest_para_Cliente()
         {
             // Given
-            var clienteRequest = new ClienteRequest
-            {
-                Nome = "João",
-                Cpf = "123.654.897-44",
-                Tipo = 0,
-                Endereco = new EnderecoRequest
-                {
-                    Logradouro = "Rua Manoel",
-                    Numero = 888,
-                    Cep = "88899-000"
-                },
-                Contas = new ContaRequest[]
-                    {
-                        new ContaRequest
-                        {
-                            NumeroConta = "321 45 6554",
-                            Saldo = 456879126.20,
-                            ChavePix = "joao@email.com",
-                            Tipo = 0,
-                            AgenciaId = 2
-                        }
-                    }
-            };
+            var clienteRequest = new ClienteModelBuilder().BuildClienteRequest();
 
             // When
             var cliente = _mapper.Map<Cliente>(clienteRequest);
@@ -103,68 +81,47 @@ namespace ByteBank.API.Test.Models
         public void TestValidation_ClienteRequest_IsSuccess()
         {
             // Given
-            var request = new ClienteRequest
-            {
-                Nome = "João",
-                Cpf = "123.654.897-44",
-                Tipo = 0,
-                Endereco = new EnderecoRequest
-                {
-                    Logradouro = "Rua Manoel",
-                    Numero = 888,
-                    Cep = "88899-000"
-                },
-                Contas = new ContaRequest[]
-                    {
-                        new ContaRequest
-                        {
-                            NumeroConta = "3219-4545-6554-9635",
-                            Saldo = 456879126.20,
-                            ChavePix = "joao@email.com",
-                            Tipo = 0,
-                            AgenciaId = 2
-                        }
-                    }
-            };
+            var request1 = new ClienteModelBuilder().BuildClienteRequest();
+            var request2 = new ClienteModelBuilder().BuildClienteRequest();
+            var request3 = new ClienteModelBuilder().BuildClienteRequest();
+            var request4 = new ClienteModelBuilder().BuildClienteRequest();
 
             // When
-            var validation = _validator.Validate(request);
+            List<FluentValidation.Results.ValidationResult?> validations = new(){
+                _validator.Validate(request1),
+                _validator.Validate(request2),
+                _validator.Validate(request3),
+                _validator.Validate(request4)
+            };
+
             // Then
-            Assert.NotNull(validation);
-            Assert.True(validation.IsValid);
+            foreach (var validation in validations)
+            {
+                Assert.NotNull(validation);
+                Assert.True(validation.IsValid);
+            }
         }
 
         [Theory]
-        [InlineData("", "123.654.897-44", TipoCliente.PessoaFisica, "Nome é obrigatório")]
+        [InlineData("", "123.654.897-44", 0, "Nome é obrigatório")]
+        [InlineData("João", "123.654.897-44", 10, "Expecifique - PessoaFísica = 0, Cnpj = 1")]
         [InlineData("João Maria José Francisco Xavier de Paula Luís António Domingos Rafael de Bragança",
-        "123.654.897-44", TipoCliente.PessoaFisica, "Mínimo de 3 caracteres, máximo de 30 caracteres")]
-        [InlineData("John", "12365489744", TipoCliente.PessoaFisica, "Informe o CPF no formato 000.000.000-00")]
-        [InlineData("John", "123-654-897-44", TipoCliente.PessoaFisica, "Informe o CPF no formato 000.000.000-00")]
-        [InlineData("John", "123.654.897.44", TipoCliente.PessoaFisica, "Informe o CPF no formato 000.000.000-00")]
-        public void TestValidation_ClienteRequest_IsFail(string nome, string cpf, TipoCliente tipo, string exception)
+        "123.654.897-44", 0, "Mínimo de 3 caracteres, máximo de 30 caracteres")]
+        [InlineData("John", "12365489744", 0, "Informe o CPF no formato 000.000.000-00")]
+        [InlineData("John", "123-654-897-44", 0, "Informe o CPF no formato 000.000.000-00")]
+        [InlineData("John", "123.654.897.44", 0, "Informe o CPF no formato 000.000.000-00")]
+        public void TestValidation_ClienteRequest_IsFail(string nome, string cpf, int tipo, string exception)
         {
             // Given
             var request = new ClienteRequest
             {
                 Nome = nome,
                 Cpf = cpf,
-                Tipo = tipo,
-                Endereco = new EnderecoRequest
-                {
-                    Logradouro = "Rua Manoel",
-                    Numero = 888,
-                    Cep = "88899-000"
-                },
+                Tipo = (TipoCliente)tipo,
+                Endereco = new EnderecoModelBuilder().BuildEnderecoRequest(),
                 Contas = new ContaRequest[]
                     {
-                        new ContaRequest
-                        {
-                            NumeroConta = "3219-4545-6554-9635",
-                            Saldo = 456879126.20,
-                            ChavePix = "joao@email.com",
-                            Tipo = 0,
-                            AgenciaId = 2
-                        }
+                        new ContaModelBuilder().BuildContaRequest()
                     }
             };
 
@@ -176,41 +133,5 @@ namespace ByteBank.API.Test.Models
             Assert.Equal(exception, validation.Errors.FirstOrDefault()?.ToString());
         }
 
-        [Fact]
-        public void Test_TipoCliente_IsFail()
-        {
-            // Given
-            var request = new ClienteRequest
-            {
-                Nome = "João",
-                Cpf = "456.789.951-59",
-                Tipo = (TipoCliente)3,
-                Endereco = new EnderecoRequest
-                {
-                    Logradouro = "Rua Manoel",
-                    Numero = 888,
-                    Cep = "88899-000"
-                },
-                Contas = new ContaRequest[]
-                    {
-                        new ContaRequest
-                        {
-                            NumeroConta = "3219-4545-6554-9635",
-                            Saldo = 456879126.20,
-                            ChavePix = "joao@email.com",
-                            Tipo = 0,
-                            AgenciaId = 2
-                        }
-                    }
-            };
-            var exception = "Expecifique - PessoaFísica = 0, Cnpj = 1";
-
-            // When
-            var validation = _validator.Validate(request);
-            // Then
-            Assert.NotNull(validation);
-            Assert.False(validation.IsValid);
-            Assert.Equal(exception, validation.Errors.FirstOrDefault()?.ToString());
-        }
     }
 }
