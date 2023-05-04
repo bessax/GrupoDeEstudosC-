@@ -3,6 +3,11 @@
 namespace ByteBank.API.Request.Validator;
 public class ContaValidator : AbstractValidator<ContaRequest>
 {
+    private string email = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
+    private string cpf = @"^\d{3}\.\d{3}\.\d{3}-\d{2}$";
+    private string cnpj = @"^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$";
+    private string celular = @"^(?:(?:\+|00)55\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:(9\d{4})\-?(\d{4}))$";
+
     public ContaValidator()
     {
         RuleFor(c => c.NumeroConta)
@@ -17,8 +22,11 @@ public class ContaValidator : AbstractValidator<ContaRequest>
             .WithMessage("Obrigatório saldo inicial");
 
         RuleFor(c => c.ChavePix)
+            .Cascade(CascadeMode.Stop)
             .NotEmpty()
-            .WithMessage("A chave pix é obrigatória");
+            .WithMessage("A chave pix é obrigatória")
+            .Matches($"{email}|{cpf}|{cnpj}|{celular}")
+            .WithMessage("Formato de Pix incorreto! CPF: formato 000.000.000-00, CNPJ: formato 11.222.333/4444-55, Email: formato email@email.com, Tel: formato (xx) xxxxx-xxxx");
 
         RuleFor(c => c.Tipo)
             .IsInEnum()

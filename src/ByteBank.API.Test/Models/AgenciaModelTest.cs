@@ -5,7 +5,6 @@ using ByteBank.API.Test.Builder;
 using ByteBank.API.ViewModels.Automapper.Profiles;
 using FluentValidation;
 
-
 namespace ByteBank.API.Test.Models
 {
     public class AgenciaModelTest
@@ -14,7 +13,7 @@ namespace ByteBank.API.Test.Models
         private readonly IMapper _mapper;
         public AgenciaModelTest()
         {
-           this._validator=new AgenciaValidator();
+            this._validator = new AgenciaValidator();
             if (_mapper == null)
             {
                 var mappingConfig = new MapperConfiguration(mc =>
@@ -24,7 +23,6 @@ namespace ByteBank.API.Test.Models
                 IMapper mapper = mappingConfig.CreateMapper();
                 _mapper = mapper;
             }
-           
         }
 
         [Fact]
@@ -55,7 +53,7 @@ namespace ByteBank.API.Test.Models
 
             //Assert
             Assert.NotNull(validation);
-            Assert.False(validation.IsValid);           
+            Assert.False(validation.IsValid);
         }
     }
 }
