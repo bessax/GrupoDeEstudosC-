@@ -35,10 +35,9 @@ code ByteBank
 
 ### 3. Abra o projeto no container
 
-Use o atalho **Ctrl** + **Shift** + **P** e digite o comando:
+Uma notificação será exibida no canto inferior direito do Visual Studio Code, clique em **Reopen in Container**.
 
-```
-> Dev Containers: Reopen in Container
-```
+Ou use o atalho **Ctrl** + **Shift** + **P** e digite o comando: `> Dev Containers: Reopen in Container`.
 
 ⚠️ A primeira vez que o container é compilado pode levar alguns minutos.
+Você pode clicar em *show log* para acompanhar o progresso.
