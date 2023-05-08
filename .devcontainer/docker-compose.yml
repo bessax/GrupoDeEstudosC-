@@ -5,6 +5,9 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
+    environment:
+      ConnectionStrings__ByteBankConnection: Server=db;User ID=sa;Password=P@ssw0rd;Initial Catalog=ByteBank;TrustServerCertificate=true;
+      
 
     volumes:
       - ../..:/workspaces:cached
