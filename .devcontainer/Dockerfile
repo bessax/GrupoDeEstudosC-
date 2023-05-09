@@ -5,6 +5,7 @@ COPY mssql/installSQLtools.sh installSQLtools.sh
 RUN bash ./installSQLtools.sh \
      && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
+ENV PATH $PATH:/root/.dotnet/tools
 COPY dotnet/* .
 RUN bash InstallTools.sh
 
