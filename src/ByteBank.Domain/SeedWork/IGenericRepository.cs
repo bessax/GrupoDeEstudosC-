@@ -4,9 +4,9 @@ public interface IGenericRepository<TEntity> : IRepository<TEntity>
     where TEntity : Entity, IAggregateRoot
 {
     void Add(TEntity entity);
-    Task<int> Count();
+    Task<int> CountAsync();
     void Delete(TEntity entity);
-    Task<TEntity?> GetById(int id);
-    Task<IEnumerable<TEntity>> GetAll();
-    Task<IEnumerable<TEntity>> GetByPage(int pageNumber, int pageSize);
+    Task<TEntity?> GetByIdAsync(int id);
+    Task<IEnumerable<TEntity>> GetAllAsync();
+    Task<IEnumerable<TEntity>> GetByPageAsync(int pageNumber, int pageSize);
 }

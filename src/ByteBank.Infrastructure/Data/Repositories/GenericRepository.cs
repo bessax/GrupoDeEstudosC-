@@ -18,7 +18,7 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity>
         _dbSet.Add(entity);
     }
 
-    public async Task<int> Count()
+    public async Task<int> CountAsync()
     {
         return await _dbSet.CountAsync();
     }
@@ -28,17 +28,17 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity>
         _dbSet.Remove(entity);
     }
 
-    public async Task<IEnumerable<TEntity>> GetAll()
+    public async Task<IEnumerable<TEntity>> GetAllAsync()
     {
         return await _dbSet.ToListAsync();
     }
 
-    public async Task<TEntity?> GetById(int id)
+    public async Task<TEntity?> GetByIdAsync(int id)
     {
         return await _dbSet.FindAsync(id);
     }
 
-    public async Task<IEnumerable<TEntity>> GetByPage(int pageNumber, int pageSize)
+    public async Task<IEnumerable<TEntity>> GetByPageAsync(int pageNumber, int pageSize)
     {
         return await _dbSet
             .OrderBy(e => e.Id)

@@ -8,6 +8,9 @@ public class UpdateAgenciaValidator
         RuleFor(ua => ua.Id)
             .GreaterThan(0);
 
+        RuleFor(ua => ua.Nome)
+            .NotEmpty();
+
         RuleFor(ua => ua.Logradouro)
             .NotEmpty();
 

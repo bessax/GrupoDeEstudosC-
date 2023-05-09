@@ -6,10 +6,12 @@ public class AgenciasController
     : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly ILogger<AgenciasController> _logger;
 
-    public AgenciasController(IMediator mediator)
+    public AgenciasController(IMediator mediator, ILogger<AgenciasController> logger)
     {
         _mediator = mediator;
+        _logger = logger;
     }
 
     [HttpGet]
@@ -17,6 +19,8 @@ public class AgenciasController
         int pageNumber = 1,
         int pageSize = 10)
     {
+        _logger.LogError("Teste de log de erro");
+
         var result = await _mediator.Send(
             new GetAgenciasByPage(
                 pageNumber,

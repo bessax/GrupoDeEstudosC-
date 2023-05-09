@@ -14,7 +14,7 @@ public class UpdateAgenciaHandler
         UpdateAgencia request,
         CancellationToken cancellationToken)
     {
-        var agencia = await _repository.GetById(request.Id);
+        var agencia = await _repository.GetByIdAsync(request.Id);
 
         if (agencia is null)
         {

@@ -4,6 +4,14 @@ public class Agencia : Entity, IAggregateRoot
 {
     public Agencia(string nome, Endereco endereco)
     {
+        ArgumentException.ThrowIfNullOrEmpty(
+            nome,
+            nameof(nome));
+
+        ArgumentNullException.ThrowIfNull(
+            endereco,
+            nameof(endereco));
+
         Nome = nome;
         Endereco = endereco;
     }
@@ -18,6 +26,8 @@ public class Agencia : Entity, IAggregateRoot
 
     public void UpdateNome(string nome)
     {
+        ArgumentException.ThrowIfNullOrEmpty(nome, nameof(nome));
+
         Nome = nome;
     }
 }

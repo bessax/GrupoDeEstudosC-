@@ -14,7 +14,7 @@ public class GetAgenciasHandler
         GetAgencias request,
         CancellationToken cancellationToken)
     {
-        var agencias = await _repository.GetAll();
+        var agencias = await _repository.GetAllAsync();
 
         return Result.Ok(
             new GetAgenciasResultValue(

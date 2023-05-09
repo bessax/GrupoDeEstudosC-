@@ -14,7 +14,7 @@ public class GetAgenciasByPageHandler
         GetAgenciasByPage request,
         CancellationToken cancellationToken)
     {
-        var agencias = await _repository.GetByPage(
+        var agencias = await _repository.GetByPageAsync(
             request.PageNumber,
             request.PageSize);
 

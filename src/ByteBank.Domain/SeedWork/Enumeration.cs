@@ -1,5 +1,3 @@
-using System.Reflection;
-
 namespace ByteBank.Domain.SeedWork;
 
 public abstract class Enumeration : IComparable
@@ -43,11 +41,6 @@ public abstract class Enumeration : IComparable
 
     public int CompareTo(object? other)
     {
-        if (other is null)
-        {
-            return 1;
-        }
-
-        return Id.CompareTo(((Enumeration)other).Id);
+        return other is null ? 1 : Id.CompareTo(((Enumeration)other).Id);
     }
 }

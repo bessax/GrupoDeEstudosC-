@@ -1,3 +1,5 @@
+global using System.Reflection;
+
 global using ByteBank.Domain.AggregateModels.AgenciaAggregates;
 global using ByteBank.Domain.AggregateModels.ClienteAggregates;
 global using ByteBank.Domain.AggregateModels.ContaAggregates;

@@ -24,10 +24,7 @@ namespace ByteBank.Infrastructure.Data.Migrations
                     Endereco_Cep = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Endereco_Numero = table.Column<int>(type: "int", nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Agencias", x => x.Id);
-                });
+                constraints: table => table.PrimaryKey("PK_Agencias", x => x.Id));
 
             migrationBuilder.CreateTable(
                 name: "TipoCliente",
@@ -37,10 +34,7 @@ namespace ByteBank.Infrastructure.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TipoCliente", x => x.Id);
-                });
+                constraints: table => table.PrimaryKey("PK_TipoCliente", x => x.Id));
 
             migrationBuilder.CreateTable(
                 name: "TipoConta",
@@ -50,10 +44,7 @@ namespace ByteBank.Infrastructure.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TipoConta", x => x.Id);
-                });
+                constraints: table => table.PrimaryKey("PK_TipoConta", x => x.Id));
 
             migrationBuilder.CreateTable(
                 name: "Clientes",

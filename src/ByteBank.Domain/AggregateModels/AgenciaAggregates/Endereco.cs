@@ -8,6 +8,18 @@ public class Endereco
         int numero,
         string? complemento = null)
     {
+        ArgumentException.ThrowIfNullOrEmpty(
+            logradouro,
+            nameof(logradouro));
+
+        ArgumentException.ThrowIfNullOrEmpty(
+            cep,
+            nameof(cep));
+
+        if (numero <= 0)
+            throw new ArgumentOutOfRangeException(
+                nameof(numero));
+
         Logradouro = logradouro;
         Complemento = complemento;
         Cep = cep;
@@ -21,6 +33,10 @@ public class Endereco
 
     public void UpdateLogradouro(string logradouro)
     {
+        ArgumentException.ThrowIfNullOrEmpty(
+            logradouro,
+            nameof(logradouro));
+
         Logradouro = logradouro;
     }
 
@@ -31,11 +47,19 @@ public class Endereco
 
     public void UpdateCep(string cep)
     {
+        ArgumentException.ThrowIfNullOrEmpty(
+            cep,
+            nameof(cep));
+
         Cep = cep;
     }
 
     public void UpdateNumero(int numero)
     {
+        if (numero <= 0)
+            throw new ArgumentOutOfRangeException(
+                nameof(numero));
+
         Numero = numero;
     }
 }

@@ -9,12 +9,12 @@ public class ClienteFisico : Cliente
         Cpf = cpf;
     }
 
-    #pragma warning disable CS8618
+#pragma warning disable CS8618
     private ClienteFisico()
         : base()
     {
     }
-    #pragma warning restore CS8618
+#pragma warning restore CS8618
 
     public string Cpf { get; private set; }
 }
