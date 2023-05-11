@@ -1,50 +1,38 @@
-var builder = WebApplication.CreateBuilder(args);
-var services = builder.Services;
-var assemblies = new Dictionary<string, Assembly>
+namespace ByteBank.Api;
+
+public class Program
 {
-    ["App"] = Assembly.Load("ByteBank.Application")
-};
+    public static void Main(string[] args)
+    {
+        var host = CreateHostBuilder(args).Build();
 
-services.AddScoped<IUnitOfWork, UnitOfWork>();
-services.AddScoped<IAgenciaRepository, AgenciaRepository>();
-services.AddScoped<IClienteRepository, ClienteRepository>();
-services.AddScoped<IContaRepository, ContaRepository>();
-services.AddScoped<IAgenciaRepository, AgenciaRepository>();
-services.AddScoped(
-    typeof(IGenericRepository<>),
-    typeof(GenericRepository<>));
+        using (var scope = host.Services.CreateScope())
+        {
+            MigrateByteBankDatabase(scope);
+            MigrateIdentityDatabase(scope);
+        }
 
-services.AddDbContext<ByteBankContext>(
-    options => options.UseSqlServer(
-        "Name=ByteBankConnection"));
+        host.Run();
+    }
+    
+    public static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(
+                webBuilder => webBuilder.UseStartup<Startup>());
 
-services.AddMediatR(
-    c => c.RegisterServicesFromAssembly(
-        assemblies["App"]));
+    private static void MigrateByteBankDatabase(IServiceScope scope)
+    {
+        scope.ServiceProvider
+            .GetRequiredService<ByteBankContext>()
+            .Database
+            .Migrate();
+    }
 
-services.AddValidatorsFromAssembly(
-    assemblies["App"]);
-
-services.AddControllers();
-
-services.AddEndpointsApiExplorer();
-services.AddSwaggerGen();
-
-var app = builder.Build();
-
-if (app.Environment.IsDevelopment())
-{
-    using var scope = app.Services.CreateScope();
-    await scope.ServiceProvider
-        .GetRequiredService<ByteBankContext>()
-        .Database.MigrateAsync();
-
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    private static void MigrateIdentityDatabase(IServiceScope scope)
+    {
+        scope.ServiceProvider
+            .GetRequiredService<IdentityContext>()
+            .Database
+            .Migrate();
+    }
 }
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();

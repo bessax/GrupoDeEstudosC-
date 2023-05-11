@@ -4,15 +4,9 @@ Projeto de estudo do curso de C# da Alura.
 
 ## 🛠️ Desenvolvimento
 
-O ambiente de desenvolvimento é composto por um container Docker, que contém todas as ferramentas necessárias para o desenvolvimento do projeto.
+O ambiente de desenvolvimento é composto por um container Docker, que contém todas as ferramentas necessárias para o desenvolvimento e execução do projeto.
 
 [Para mais informações, veja a documentação.](./doc/ambiente-de-desenvolvimento.md)
-
-## 🚀 Rodando o Projeto
-
-Você pode executar o projeto usando o ambiente de desenvolvimento.
-
-[Para mais informações, veja a documentação.](./doc/rodando-o-projeto.md)
 
 ## 📄 Design do Software
 

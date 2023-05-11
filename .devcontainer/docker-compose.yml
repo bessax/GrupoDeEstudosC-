@@ -7,6 +7,7 @@ services:
       dockerfile: Dockerfile
     environment:
       ConnectionStrings__ByteBankConnection: Server=db;User ID=sa;Password=P@ssw0rd;Initial Catalog=ByteBank;TrustServerCertificate=true;
+      ConnectionStrings__IdentityConnection: Server=db;User ID=sa;Password=P@ssw0rd;Initial Catalog=Identity;TrustServerCertificate=true;
       
 
     volumes:

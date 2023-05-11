@@ -41,3 +41,10 @@ Ou use o atalho **Ctrl** + **Shift** + **P** e digite o comando: `> Dev Containe
 
 ⚠️ A primeira vez que o container é compilado pode levar alguns minutos.
 Você pode clicar em *show log* para acompanhar o progresso.
+
+### 4. Excute o projeto
+
+
+Você pode executar o projeto teclando **Ctrl** + **F5**, no Visual Studio Code.
+
+[Para mais informações, veja a documentação.](./rodando-o-projeto.md)

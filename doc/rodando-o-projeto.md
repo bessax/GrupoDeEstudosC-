@@ -12,7 +12,7 @@ Para depurar o projeto, no Visual Studio Code, use a tecla **F5** ou use o atalh
 
 ## Executando sem Depurar
 
-Para executar o projeto sem depurar, no Visual Studio Code, use o atalho **Ctrl** + **Shift** + **P** e digite o comando:
+Para executar o projeto sem depurar, no Visual Studio Code, tecle **Ctrl** + **F5** ou use o atalho **Ctrl** + **Shift** + **P** e digite o comando:
 
 ```
 > Debbug: Start Without Debugging

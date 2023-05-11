@@ -17,8 +17,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ByteBank.UnitTests", "ByteB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ByteBank.IntegrationTests", "ByteBank.IntegrationTests\ByteBank.IntegrationTests.csproj", "{6814AEB7-9E12-4B5D-A0D0-D99CF13B4C3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ByteBank.FunctionalTests", "ByteBank.FunctionalTests\ByteBank.FunctionalTests.csproj", "{8090E982-D50B-4B15-B3EA-0864ACEE9759}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,14 +50,9 @@ Global
 		{6814AEB7-9E12-4B5D-A0D0-D99CF13B4C3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6814AEB7-9E12-4B5D-A0D0-D99CF13B4C3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6814AEB7-9E12-4B5D-A0D0-D99CF13B4C3D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8090E982-D50B-4B15-B3EA-0864ACEE9759}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8090E982-D50B-4B15-B3EA-0864ACEE9759}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8090E982-D50B-4B15-B3EA-0864ACEE9759}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8090E982-D50B-4B15-B3EA-0864ACEE9759}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8EAFD3C6-7D41-4B30-95D6-62B30408B42E} = {62F6E3C4-7994-49EE-9932-6C7101ABDDD1}
 		{6814AEB7-9E12-4B5D-A0D0-D99CF13B4C3D} = {62F6E3C4-7994-49EE-9932-6C7101ABDDD1}
-		{8090E982-D50B-4B15-B3EA-0864ACEE9759} = {62F6E3C4-7994-49EE-9932-6C7101ABDDD1}
 	EndGlobalSection
 EndGlobal

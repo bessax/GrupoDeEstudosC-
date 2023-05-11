@@ -1,6 +1,9 @@
+using Microsoft.AspNetCore.Authorization;
+
 namespace ByteBank.Api.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("api/v1/[Controller]")]
 public class AgenciasController
     : ControllerBase
@@ -72,6 +75,7 @@ public class AgenciasController
             HandleFailure(result);
     }
 
+    // TODO: Queria melhorar isso, mas não sei como 🙃
     private IActionResult HandleFailure<TValue>(Result<TValue> result)
     {
         if (result.HasError<ResourceNotFoundError>())
@@ -79,13 +83,13 @@ public class AgenciasController
             return NotFound();
         }
 
-        if (result.HasError<ValidationError>(
-            out IEnumerable<ValidationError> validationErrors))
+        if (result.HasError<ValidationError>(out IEnumerable<ValidationError> validationErrors))
         {
             foreach (var item in validationErrors.SelectMany(e => e.Errors))
             {
                 ModelState.AddModelError(item.FieldName, item.ErrorMessage);
             }
+
             return ValidationProblem();
         }
 
