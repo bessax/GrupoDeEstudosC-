@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Identity;
-
 namespace ByteBank.Application.Handlers;
 
 public class CreateUserHandler

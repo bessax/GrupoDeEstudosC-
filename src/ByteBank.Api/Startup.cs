@@ -1,5 +1,3 @@
-using ByteBank.Api.Extensions;
-
 namespace ByteBank.Api;
 
 public class Startup
@@ -93,9 +91,6 @@ public class Startup
 
         app.UseAuthorization();
 
-        app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapControllers();
-        });
+        app.UseEndpoints(endpoints => endpoints.MapControllers());
     }
 }

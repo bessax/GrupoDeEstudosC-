@@ -18,7 +18,7 @@ public class AccountController
         var result = await _mediator.Send(request);
 
         return (result.IsSuccess) ?
-            Ok() :
+            NoContent() :
             HandleFailure(result);
     }
 

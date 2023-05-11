@@ -2,6 +2,8 @@ namespace ByteBank.IntegrationTests.Fixtures;
 
 public class DbContextFixture : IDisposable
 {
+    private bool _disposedValue;
+
     public DbContextFixture()
     {
         Options = new DbContextOptionsBuilder<ByteBankContext>()
@@ -18,8 +20,21 @@ public class DbContextFixture : IDisposable
 
     public void Dispose()
     {
-        using var context = new ByteBankContext(Options);
+        Dispose(disposing: true);
+        GC.SuppressFinalize(this);
+    }
 
-        context.Database.EnsureDeleted();
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!_disposedValue)
+        {
+            if (disposing)
+            {
+                using var context = new ByteBankContext(Options);
+                context.Database.EnsureDeleted();
+            }
+
+            _disposedValue = true;
+        }
     }
 }

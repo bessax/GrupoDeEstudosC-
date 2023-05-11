@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Authorization;
-
 namespace ByteBank.Api.Controllers;
 
 [ApiController]
@@ -65,10 +63,11 @@ public class AgenciasController
             HandleFailure(result);
     }
 
-    [HttpDelete]
-    public async Task<IActionResult> DeleteAgencia(DeleteAgencia request)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteAgencia(int id)
     {
-        var result = await _mediator.Send(request);
+        var result = await _mediator.Send(
+            new DeleteAgencia(id));
 
         return (result.IsSuccess) ?
             Ok(result.Value) :
