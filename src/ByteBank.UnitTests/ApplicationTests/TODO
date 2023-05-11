@@ -1,0 +1,40 @@
+[X] CreateAgenciaTest
+[x] UpdateAgenciaTest
+[x] DeleteAgenciaTest
+[x] GetAgenciaByIdTest
+[x] GetAgenciasByPageTest
+[x] GetAllAgenciasTest
+
+[ ] DeleteClienteTest
+[ ] GetClienteByIdTest
+[ ] GetClientesByPageTest
+[ ] GetAllClientesTest
+
+[ ] CreateClienteFisicoTest
+[ ] CreateClienteJuridicoTest
+[ ] UpdateClienteFisicoTest
+[ ] UpdateClienteJuridicoTest
+
+[ ] GetClienteFisicoByIdTest
+[ ] GetClienteJuridicoByIdTest
+[ ] GetClientesFisicosByPageTest
+[ ] GetClientesJuridicosByPageTest
+[ ] GetAllClientesFisicosTest
+[ ] GetAllClientesJuridicosTest
+
+[ ] DeleteContaTest
+[ ] GetContaByIdTest
+[ ] GetContasByPageTest
+[ ] GetAllContasTest
+
+[ ] CreateContaCorrenteTest
+[ ] CreateContaPoupancaTest
+[ ] UpdateContaCorrenteTest
+[ ] UpdateContaPoupancaTest
+
+[ ] GetContaCorrenteByIdTest
+[ ] GetContaPoupancaByIdTest
+[ ] GetContasCorrentesByPageTest
+[ ] GetContasPoupancasByPageTest
+[ ] GetAllContasCorrentesTest
+[ ] GetAllContasPoupancasTest

@@ -2,7 +2,13 @@
 
 O ambiente de desenvolvimento é composto por um container Docker, que contém todas as ferramentas necessárias para o desenvolvimento do projeto.
 
-Será necessário instalar algumas ferramentas:
+#
+
+## Requisitos
+
+O container ira consumir muitos recursos do computador, por isso recomendo ter 2 GB de memória RAM disponível.
+
+Também é necessário ter instalado:
 
 ### [🐳 Docker](https://www.docker.com/)
 
@@ -19,6 +25,8 @@ Editor de código usado para desenvolver o projeto.
 Extensão do Visual Studio Code que permite usar o Docker para criar um ambiente de desenvolvimento.
 Instale após concluir a instalação do Visual Studio Code.
 
+#
+
 ## Começando a Desenvolver
 
 ### 1. Clone o repositório
@@ -28,6 +36,8 @@ git clone ~/brunoaragao/ByteBank.git
 ```
 
 ### 2. Abra o projeto no Visual Studio Code
+
+Você pode fazer isso pelo visual studio code, ou pelo terminal:
 
 ```sh
 code ByteBank
@@ -42,8 +52,7 @@ Ou use o atalho **Ctrl** + **Shift** + **P** e digite o comando: `> Dev Containe
 ⚠️ A primeira vez que o container é compilado pode levar alguns minutos.
 Você pode clicar em *show log* para acompanhar o progresso.
 
-### 4. Excute o projeto
-
+### 4. Execute o projeto
 
 Você pode executar o projeto teclando **Ctrl** + **F5**, no Visual Studio Code.
 

@@ -1,0 +1,40 @@
+[X] CreateAgenciaValidator
+[x] UpdateAgenciaValidator
+[x] DeleteAgenciaValidator
+[x] GetAgenciaByIdValidator
+[x] GetAgenciasByPageValidator
+[x] GetAllAgenciasValidator
+
+[ ] DeleteClienteValidator
+[ ] GetClienteByIdValidator
+[ ] GetClientesByPageValidator
+[ ] GetAllClienValidatorest
+
+[ ] CreateClienteFisicoValidator
+[ ] CreateClienteJuridicoValidator
+[ ] UpdateClienteFisicoValidator
+[ ] UpdateClienteJuridicoValidator
+
+[ ] GetClienteFisicoByIdValidator
+[ ] GetClienteJuridicoByIdValidator
+[ ] GetClientesFisicosByPageValidator
+[ ] GetClientesJuridicosByPageValidator
+[ ] GetAllClientesFisicosValidator
+[ ] GetAllClientesJuridicosValidator
+
+[ ] DeleteContaValidator
+[ ] GetContaByIdValidator
+[ ] GetContasByPageValidator
+[ ] GetAllContasValidator
+
+[ ] CreateContaCorrenteValidator
+[ ] CreateContaPoupancaValidator
+[ ] UpdateContaCorrenteValidator
+[ ] UpdateContaPoupancaValidator
+
+[ ] GetContaCorrenteByIdValidator
+[ ] GetContaPoupancaByIdValidator
+[ ] GetContasCorrentesByPageValidator
+[ ] GetContasPoupancasByPageValidator
+[ ] GetAllContasCorrenValidatorest
+[ ] GetAllContasPoupancasValidator
