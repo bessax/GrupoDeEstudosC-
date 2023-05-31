@@ -28,7 +28,6 @@ namespace ByteBank.API.Test.Services
                 .Build().ToList();
 
             repositoryMock.Setup(x => x.BuscaTodosAsync()).ReturnsAsync(agencia);
-
             mapperMock.Setup(x => x.Map<List<AgenciaViewModel>>(agencia)).Returns(agenciaViewModel);
 
             var service = new AgenciasService(repositoryMock.Object, mapperMock.Object, validation);

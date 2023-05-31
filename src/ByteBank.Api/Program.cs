@@ -1,38 +1,65 @@
-namespace ByteBank.Api;
+using ByteBank.API.Data;
+using ByteBank.API.Extensions;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
-public class Program
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.AddDbContext<ByteBankContext>(options =>
 {
-    public static void Main(string[] args)
+    options.UseSqlServer("Name=ByteBankConnection");
+});
+
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+    .AddEntityFrameworkStores<ByteBankContext>()
+    .AddDefaultTokenProviders();
+
+//Validando o token em cada requisi��o.
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
+    opt => opt.TokenValidationParameters = new TokenValidationParameters
     {
-        var host = CreateHostBuilder(args).Build();
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidAudience = builder.Configuration["JWTTokenConfiguration:Audience"],
+        ValidIssuer = builder.Configuration["JWTTokenConfiguration:Issuer"],
+        IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(builder.Configuration["JWTKey:key"])),
+    });
 
-        using (var scope = host.Services.CreateScope())
-        {
-            MigrateByteBankDatabase(scope);
-            MigrateIdentityDatabase(scope);
-        }
+builder.Services.ConfigureDI();
 
-        host.Run();
-    }
+builder.Services.AddControllers(options =>
+{
+    options.SuppressAsyncSuffixInActionNames = false;
+});
 
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(
-                webBuilder => webBuilder.UseStartup<Startup>());
+//Configura��o do Swagger para habilitar JWT Bearer
+builder.Services.ConfigureSwaggerBearer();
 
-    private static void MigrateByteBankDatabase(IServiceScope scope)
-    {
-        scope.ServiceProvider
-            .GetRequiredService<ByteBankContext>()
-            .Database
-            .Migrate();
-    }
+var app = builder.Build();
 
-    private static void MigrateIdentityDatabase(IServiceScope scope)
-    {
-        scope.ServiceProvider
-            .GetRequiredService<IdentityContext>()
-            .Database
-            .Migrate();
-    }
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
+
+app.MapGet("/", () => Results.Redirect("/swagger"));
+app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<ByteBankContext>();
+    context.Database.Migrate();
+}
+
+app.UseAuthentication();
+app.UseAuthorization();
+app.Run();

@@ -9,8 +9,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:5000
-      - ConnectionStrings__ByteBankConnection=Server=db;User ID=sa;Password=P@ssw0rd;Initial Catalog=ByteBank;TrustServerCertificate=true;
-      - ConnectionStrings__IdentityConnection=Server=db;User ID=sa;Password=P@ssw0rd;Initial Catalog=Identity;TrustServerCertificate=true;
+      - ConnectionStrings__ByteBankConnection=Server=db;Database=ByteBank;User Id=sa;Password=P@ssw0rd;TrustServerCertificate=True;
     volumes:
     - type: bind
       source: /var/run/docker.sock

@@ -1,29 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>9a6900c3-9bec-4792-afd3-5d499ca67036</UserSecretsId>
+    <UserSecretsId>69a2b5e5-b4f0-49a7-bb86-fe40f394b88b</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Duende.IdentityServer" Version="6.2.3" />
-    <PackageReference Include="Duende.IdentityServer.AspNetIdentity" Version="6.2.3" />
-    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.5.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.5">
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+    <PackageReference Include="FluentValidation" Version="11.5.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.2.2" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.5.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.2">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\ByteBank.Infrastructure\ByteBank.Infrastructure.csproj" />
-    <ProjectReference Include="..\ByteBank.Application\ByteBank.Application.csproj" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.27.0" />
   </ItemGroup>
 
 </Project>

@@ -1,97 +1,102 @@
-namespace ByteBank.Api.Controllers;
+using ByteBank.API.Request;
+using ByteBank.API.Services.Interfaces;
+using ByteBank.API.ViewModels;
+using FluentValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
-[ApiController]
-[Authorize]
-[Route("api/v1/[Controller]")]
-public class AgenciasController
-    : ControllerBase
+namespace ByteBank.API.Controllers
 {
-    private readonly IMediator _mediator;
-    private readonly ILogger<AgenciasController> _logger;
-
-    public AgenciasController(IMediator mediator, ILogger<AgenciasController> logger)
+    [Route("api/[controller]")]
+    [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    public class AgenciasController : ControllerBase
     {
-        _mediator = mediator;
-        _logger = logger;
-    }
+        private readonly IAgenciasService service;
 
-    [HttpGet]
-    public async Task<IActionResult> GetAgenciasByPage(
-        int pageNumber = 1,
-        int pageSize = 10)
-    {
-        _logger.LogError("Teste de log de erro");
-
-        var result = await _mediator.Send(
-            new GetAgenciasByPage(
-                pageNumber,
-                pageSize));
-
-        return (result.IsSuccess) ?
-            Ok(result.Value) :
-            HandleFailure(result);
-    }
-
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetAgenciaById(int id)
-    {
-        var result = await _mediator.Send(
-            new GetAgenciaById(id));
-
-        return (result.IsSuccess) ?
-            Ok(result.Value) :
-            HandleFailure(result);
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> CreateAgencia(CreateAgencia request)
-    {
-        var result = await _mediator.Send(request);
-
-        return (result.IsSuccess) ?
-            Ok(result.Value) :
-            HandleFailure(result);
-    }
-
-    [HttpPut]
-    public async Task<IActionResult> UpdateAgencia(UpdateAgencia request)
-    {
-        var result = await _mediator.Send(request);
-
-        return (result.IsSuccess) ?
-            Ok(result.Value) :
-            HandleFailure(result);
-    }
-
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteAgencia(int id)
-    {
-        var result = await _mediator.Send(
-            new DeleteAgencia(id));
-
-        return (result.IsSuccess) ?
-            Ok(result.Value) :
-            HandleFailure(result);
-    }
-
-    // TODO: Queria melhorar isso, mas não sei como 🙃
-    private IActionResult HandleFailure<TValue>(Result<TValue> result)
-    {
-        if (result.HasError<ResourceNotFoundError>())
+        public AgenciasController(IAgenciasService service)
         {
-            return NotFound();
+            this.service = service;
         }
 
-        if (result.HasError<ValidationError>(out IEnumerable<ValidationError> validationErrors))
+        // GET: api/Agencias
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<AgenciaViewModel>>> GetAgencias()
         {
-            foreach (var item in validationErrors.SelectMany(e => e.Errors))
+            var agencias = await this.service.BuscaAgenciasAsync();
+
+            if (agencias == null)
             {
-                ModelState.AddModelError(item.FieldName, item.ErrorMessage);
+                return this.NotFound();
             }
 
-            return ValidationProblem();
+            return agencias;
         }
 
-        return BadRequest();
+        // GET: api/Agencias/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<AgenciaViewModel>> GetAgencia(int id)
+        {
+            var agencia = await this.service.BuscaAgenciaPorIdAsync(id);
+
+            if (agencia == null)
+            {
+                return this.NotFound();
+            }
+
+            return agencia;
+        }
+
+        // PUT: api/Agencias/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutAgencia(int id, AgenciaRequest agencia)
+        {
+            try
+            {
+                return await this.service.AlteraAgenciaAsync(id, agencia) ? this.NoContent() : this.NotFound();
+            }
+            catch (ValidationException e)
+            {
+                return BadRequest(e.Message);
+            }
+
+        }
+
+        // POST: api/Agencias
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<AgenciaViewModel>> PostAgencia(AgenciaRequest agencia)
+        {
+            try
+            {
+                var agenciaCriada = await this.service.CriaAgenciaAsync(agencia);
+
+                return this.CreatedAtAction("GetAgencia", new { id = agenciaCriada.Id }, agenciaCriada);
+            }
+            catch (ValidationException e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        // DELETE: api/Agencias/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAgencia(int id)
+        {
+            return await this.service.DeletaAgenciaAsync(id) ? this.NoContent() : this.NotFound();
+        }
+
+        [HttpGet("paginado")]
+        public async Task<ActionResult<AgenciaViewModel>> GetAgenciasPaginadasAsync(int pagina = 1, int tamanhoPagina = 10)
+        {
+            var agencias = await service.AgenciaPaginadoAsync(pagina, tamanhoPagina);
+            if (agencias == null)
+            {
+                return this.Problem("N�o existe dados a serem retornados.");
+            }
+            return this.Ok(agencias);
+        }
     }
 }
