@@ -2,32 +2,33 @@ name: Lint Test .NET
 
 on:
   push:
-    branches: [ main, dev, develop ]
+    branches: [main, dev, develop]
   pull_request:
-    branches: [ main, dev, develop ]
+    branches: [main, dev, develop]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     defaults:
       run:
         working-directory: src
-
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 7.0.x
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
-    - name: .NET Lint
-      uses: zyactions/dotnet-lint@v1
-      with:
-        workspace: src
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 7.0.x
+      - name: Run linters
+        uses: wearerequired/lint-action@v2
+        with:
+          dotnet_format: true
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --no-restore
+      - name: Test
+        run: dotnet test --no-build --verbosity normal
+      - name: .NET Lint
+        uses: zyactions/dotnet-lint@v1
+        with:
+          workspace: src
