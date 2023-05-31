@@ -361,9 +361,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-/src/ByteBank.API/Controllers/EnderecoAgenciaController.cs
+#/src/ByteBank.API/Controllers/EnderecoAgenciaController.cs
 /src/.editorconfig
 /src/.editorconfig
 /src/Directory.Build.props
 /.github/workflows/dotnet.yml
-/src/ByteBank.API/Repository/ClienteRepository.cs
+#/src/ByteBank.API/Repository/ClienteRepository.cs
